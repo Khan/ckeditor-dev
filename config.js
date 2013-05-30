@@ -8,6 +8,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
 	// %REMOVE_START%
+	config.tabSpaces = 4;
 	config.plugins =
 		'about,' +
 		'a11yhelp,' +
@@ -64,6 +65,10 @@ CKEDITOR.editorConfig = function( config ) {
 		'toolbar,' +
 		'undo,' +
 		'wysiwygarea';
+		
+		//added for widgets
+		config.allowedContent = true;
+		
 	// %REMOVE_END%
 };
 

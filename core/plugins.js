@@ -36,6 +36,10 @@ CKEDITOR.plugins.load = CKEDITOR.tools.override( CKEDITOR.plugins.load, function
 
 						if ( !initialized[ pluginName ] ) {
 							// Register all icons eventually defined by this plugin.
+							//if(!plugin.icons)
+							//{
+							//console.log(psth)
+							//}
 							if ( plugin.icons ) {
 								var icons = plugin.icons.split( ',' );
 								for ( var ic = 0 ; ic < icons.length ; ic++ ) {
