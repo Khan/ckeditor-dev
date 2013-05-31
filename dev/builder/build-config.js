@@ -15,8 +15,8 @@ var CKBUILDER_CONFIG = {
 		'.DS_Store'
 	],
 	plugins: {
-		a11yhelp: 1,
-		about: 1,
+		a11yhelp: 0,
+		about: 0,
 		basicstyles: 1,
 		bidi: 1,
 		blockquote: 1,
@@ -69,6 +69,7 @@ var CKBUILDER_CONFIG = {
 		templates: 1,
 		toolbar: 1,
 		undo: 1,
-		wysiwygarea: 1
+		wysiwygarea: 1,
+		gglspreadsheet: 1
 	}
 };
