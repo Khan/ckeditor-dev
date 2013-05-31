@@ -65,9 +65,10 @@ CKEDITOR.editorConfig = function( config ) {
 		'toolbar,' +
 		'undo,' +
 		'wysiwygarea';
-		
+
 		//added for widgets
-		config.allowedContent = true;
+		config.extraPlugins = 'gglspreadsheet';
+
 		
 	// %REMOVE_END%
 };
