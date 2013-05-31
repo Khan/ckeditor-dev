@@ -10,8 +10,8 @@ CKEDITOR.editorConfig = function( config ) {
 	// %REMOVE_START%
 	config.tabSpaces = 4;
 	config.plugins =
-		'about,' +
-		'a11yhelp,' +
+		//'about,' +
+		//'a11yhelp,' +
 		'basicstyles,' +
 		'bidi,' +
 		'blockquote,' +
