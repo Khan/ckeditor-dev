@@ -17,7 +17,7 @@
       editor.addCommand(b,a);
       editor.ui.addButton('gglspreadsheet',{
         label:'Insert Image',
-        icon: this.path + 'icons/about.png',
+        icon: this.path + 'about.png',
         command:b
       });
     }
