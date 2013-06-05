@@ -624,7 +624,9 @@
 			{ name: 'tools' },
 			{ name: 'others' },
 			{ name: 'about' },
-			{ name: 'gglspreadsheet' }
+			{ name: 'gglspreadsheet' },
+            { name: 'youtube'},
+            { name: 'pdfs'}
 			//{ name: 'mediaembed' }
 		]);
 	}

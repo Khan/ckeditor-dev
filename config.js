@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @license Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.html or http://ckeditor.com/license
  */
@@ -9,6 +9,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.uiColor = '#AADC6E';
 	// %REMOVE_START%
 	config.tabSpaces = 4;
+    //config.forceSimpleAmpersand = true;
 	config.plugins =
 		//'about,' +
 		//'a11yhelp,' +
@@ -54,7 +55,7 @@ CKEDITOR.editorConfig = function( config ) {
 		'selectall,' +
 		'showblocks,' +
 		'showborders,' +
-		'smiley,' +
+		//'smiley,' +
 		'sourcearea,' +
 		'specialchar,' +
 		'stylescombo,' +
@@ -67,7 +68,7 @@ CKEDITOR.editorConfig = function( config ) {
 		'wysiwygarea';
 
 		//added for widgets
-		config.extraPlugins = 'gglspreadsheet';
+		config.extraPlugins = 'gglspreadsheet,youtube,pdfs';
 
 		
 	// %REMOVE_END%
