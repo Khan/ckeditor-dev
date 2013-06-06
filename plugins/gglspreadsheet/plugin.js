@@ -16,7 +16,7 @@
     init:function(editor){
       editor.addCommand(b,a);
       editor.ui.addButton('gglspreadsheet',{
-        label:'Insert Image',
+        label:'Insert Google Spreadsheet',
         icon: this.path + 'about.png',
         command:b
       });

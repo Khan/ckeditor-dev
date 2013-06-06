@@ -1,7 +1,7 @@
 (function(){
   var a= {
     exec:function(editor){
-      var link = prompt("Please enter a link to the youtube video you want to embed");
+      var link = prompt("Please enter a link to the PDF you want to embed");
       if(link != false && link != null)
       {
           editor.insertHtml('<iframe embed src="'+link+'" width="900" height="1065"></iframe>');
