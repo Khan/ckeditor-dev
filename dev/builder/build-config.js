@@ -72,6 +72,7 @@ var CKBUILDER_CONFIG = {
 		wysiwygarea: 1,
 		gglspreadsheet: 1,
         youtube: 1,
-        pdfs: 1
+        pdfs: 1,
+        image2: 1
 	}
 };

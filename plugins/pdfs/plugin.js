@@ -16,7 +16,7 @@
       editor.addCommand(b,a);
       editor.ui.addButton('pdfs',{
         label:'Embed a Pdf',
-        icon: this.path + 'about.png',
+        icon: this.path + 'pdf.png',
         command:b
       });
     }

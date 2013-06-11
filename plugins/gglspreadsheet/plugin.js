@@ -17,7 +17,7 @@
       editor.addCommand(b,a);
       editor.ui.addButton('gglspreadsheet',{
         label:'Insert Google Spreadsheet',
-        icon: this.path + 'about.png',
+        icon: this.path + 'spreadsheet.png',
         command:b
       });
     }

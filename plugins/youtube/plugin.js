@@ -25,7 +25,7 @@
       editor.addCommand(b,a);
       editor.ui.addButton('youtube',{
         label:'Insert Youtube Video',
-        icon: this.path + 'about.png',
+        icon: this.path + 'icon.png',
         command:b
       });
     }
