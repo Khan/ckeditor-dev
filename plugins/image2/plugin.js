@@ -48,7 +48,7 @@ CKEDITOR.plugins.add( 'image2',
                         },
                         {
                         	type : 'checkbox',
-                        	id : 'fullWidth',
+                        	id : 'fullwidth',
                         	label : 'Fit to fill width of article',
                         	'default' : false
                         }
@@ -60,9 +60,11 @@ CKEDITOR.plugins.add( 'image2',
                 var dialog = this,
                 	    data = {};
                 this.commitContent( data );
-                if(data.fullWidth)
+                console.log(data.fullwidth);
+                if(data.fullwidth)
                 {
                     editor.insertHtml('<img src="' + data.link + '" alt="' + data.text + '" width="100%" />');
+                    console.log('<img src="' + data.link + '" alt="' + data.text + '" width="100%" />');
                 }
                 else
                 {
