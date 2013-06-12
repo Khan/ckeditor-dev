@@ -71,7 +71,7 @@ CKEDITOR.editorConfig = function( config ) {
 		config.extraPlugins = 'gglspreadsheet,youtube,pdfs,image2';
         config.linkShowAdvancedTab = false;
         config.linkShowTargetTab = false;
-        config.extraAllowedContent = 'img[*]';
+        config.extraAllowedContent = 'img[*]{border-style,border-width,float,height,margin,margin-bottom,margin-left,margin-right,margin-top,width}';
         config.toolbar = 'KhanToolbar';
 
         config.toolbar_KhanToolbar =
@@ -86,6 +86,7 @@ CKEDITOR.editorConfig = function( config ) {
         ]
 
         config.format_tags = 'p;h1;h2;h3';
+
 
 };
 

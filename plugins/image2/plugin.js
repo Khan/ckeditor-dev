@@ -39,13 +39,18 @@ CKEDITOR.plugins.add( 'image2',
                         {
                         	type : 'textarea',
                         	id : 'text',
-                        	label : 'Alternate Text (This is what willl show if the picture cannot load.)',
-                            validate : CKEDITOR.dialog.validate.notEmpty( 'The Alternate Text field cannot be empty.' ),
-                        	required : true,
+                        	label : 'Alternate Text (This is what will show if the picture cannot load.)',
+                        	required : false,
                             commit : function( data )
                             		{
                             			data.text = this.getValue();
                             		}
+                        },
+                        {
+                        	type : 'checkbox',
+                        	id : 'fullWidth',
+                        	label : 'Fit to fill width of article',
+                        	'default' : false
                         }
       				]
       			}
@@ -55,9 +60,14 @@ CKEDITOR.plugins.add( 'image2',
                 var dialog = this,
                 	    data = {};
                 this.commitContent( data );
-                editor.insertHtml('<img src="' + data.link + '" alt="' + data.text + '">'); 
-                //editor.insertHtml("<p><img src='http://i1.ytimg.com/i/4a-Gbdw7vOaccHmFo40b9g/mq1.jpg?v=5143a908' alt='text'></p>");
-                //editor.insertHtml('test'); 
+                if(data.fullWidth)
+                {
+                    editor.insertHtml('<img src="' + data.link + '" alt="' + data.text + '" width="100%" />');
+                }
+                else
+                {
+                    editor.insertHtml('<img src="' + data.link + '" alt="' + data.text + '" />');               
+                }
             },
         };
       });
