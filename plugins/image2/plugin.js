@@ -50,7 +50,11 @@ CKEDITOR.plugins.add( 'image2',
                         	type : 'checkbox',
                         	id : 'fullwidth',
                         	label : 'Fit to fill width of article',
-                        	'default' : false
+                        	'default' : false,
+                            commit : function( data )
+                            		{
+                            			data.fullwidth = this.getValue();
+                            		}
                         }
       				]
       			}
