@@ -1,13 +1,19 @@
+/*
+This plugin embeds a youtube video in the page. command() controls what happens when the button is hit.
+*/
 (function(){
-  var a= {
+  var command= {
     exec:function(editor){
+  //TODO(annie): prettyify UI
       var link = prompt("Please enter a link to the youtube video you want to embed");
-      if(link != false && link != null)
+      if(link)
       {
+          //if the user takes the link from the 'share' tab on youtube, this case will display it correctly
           if(link.indexOf("watch?v=") == -1)
           {
               editor.insertHtml('<iframe width="560" height="315" src="' + link + '?rel=0" frameborder="0" allowfullscreen></iframe>');
           }
+          //otherwise, if the user copies the url directly from the page, this will display it correctly. 
           else
           {
               var links = link.split("watch?v=")
@@ -18,15 +24,14 @@
     },
     allowedContent: 'iframe[width,height,src,frameborder,allowfullscreen]'
   },
-
-  b='youtube';
-  CKEDITOR.plugins.add(b,{
+  pluginName='youtube';
+  CKEDITOR.plugins.add(pluginName,{
     init:function(editor){
-      editor.addCommand(b,a);
+      editor.addCommand(pluginName,command);
       editor.ui.addButton('youtube',{
         label:'Insert Youtube Video',
         icon: this.path + 'icon.png',
-        command:b
+        command:pluginName
       });
     }
   });

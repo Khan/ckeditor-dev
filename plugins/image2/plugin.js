@@ -59,7 +59,18 @@ CKEDITOR.plugins.add( 'image2',
                             		{
                             			data.fullwidth = this.getValue();
                             		}
+                        },
+                        {
+                            type : 'checkbox',
+                            id : 'inline',
+                            label : 'Inline with text',
+                            'default' : false,
+                            commit : function( data )
+                                    {
+                                    	data.inline = this.getValue();
+                                    }
                         }
+                        
       				]
       			}
       		],
@@ -68,17 +79,21 @@ CKEDITOR.plugins.add( 'image2',
                 var dialog = this,
                 	    data = {};
                 this.commitContent( data );
-                console.log(data.fullwidth);
+                var html = '';
                 if(data.fullwidth)
                 {
-                    editor.insertHtml('<img src="' + data.link + '" alt="' + data.text + '" width="100%" />');
-                    console.log('<img src="' + data.link + '" alt="' + data.text + '" width="100%" />');
+                    html='<img src="' + data.link + '" alt="' + data.text + '" width="100%" />';
                 }
                 else
                 {
-                    editor.insertHtml('<img src="' + data.link + '" alt="' + data.text + '" />');               
+                    html='<img src="' + data.link + '" alt="' + data.text + '" />';               
                 }
-            },
+                if(!data.inline)
+                {
+                    html='</p> <p>'+html+'</p> <p>';
+                }
+                editor.insertHtml(html);
+             },
         };
       });
   }
