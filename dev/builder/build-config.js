@@ -3,6 +3,11 @@
  * For licensing, see LICENSE.html or http://ckeditor.com/license
  */
 
+/* All plugins that were disabled (set to zero) were removed because we did not want content creators to have that functionality.
+gglspreadsheet was added for our googlespreadsheet embedding plugin, youtube for a youtube embedding plugin,
+pdfs for our pdf embed plugin, and image2 for a simpler image plugin
+*/
+
 var CKBUILDER_CONFIG = {
 	skin: 'moono',
 	ignore: [

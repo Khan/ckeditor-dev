@@ -609,25 +609,22 @@
 
 	function getPrivateToolbarGroups( editor ) {
 		return editor._.toolbarGroups || ( editor._.toolbarGroups = [
-			{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
-			{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
-			{ name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
-			{ name: 'forms' },
-			//'/',
-			{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-			{ name: 'paragraph',   groups: [ 'list', 'blocks', 'align' ] }, //'indent' removed
-			{ name: 'links', groups: [ 'link', 'unlink', 'anchor' ] },
-			{ name: 'insert' },
-			//'/',
-			{ name: 'styles' },
-			{ name: 'colors' },
-			{ name: 'tools' },
-			{ name: 'others' },
-			{ name: 'about' },
-			{ name: 'gglspreadsheet' },
-            { name: 'youtube'},
-            { name: 'pdfs'}
-			//{ name: 'mediaembed' }
+            {name: 'document',     groups: [ 'mode', 'document', 'doctools' ] },
+            { name: 'document',     groups: [ 'mode', 'document', 'doctools' ] },
+            { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
+            { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
+            { name: 'forms' },
+            '/',
+            { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+            { name: 'paragraph',   groups: [ 'list', 'blocks', 'align' ] }, //'indent' removed
+            { name: 'links', groups: [ 'link', 'unlink', 'anchor' ] },
+            { name: 'insert' },
+            '/',
+            { name: 'styles' },
+            { name: 'colors' },
+            { name: 'tools' },
+            { name: 'others' },
+            { name: 'about' }
 		]);
 	}
 })();

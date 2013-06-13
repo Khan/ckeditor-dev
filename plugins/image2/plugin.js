@@ -1,3 +1,7 @@
+/* This custom image plugin takes a link instead of uploading an image from the users computer, and has only the functionality we want and none of the noise we wouldn't be using.
+We wanted to give content creators options to full screen a picture and either insert it inline with text or not.
+The original editor was so complex it was easier to start from scratch. */
+
 CKEDITOR.plugins.add( 'image2',
 {
 	init: function( editor )
@@ -79,32 +83,6 @@ CKEDITOR.plugins.add( 'image2',
       });
   }
 });
-      /*if(link != false && link != null)
-      {
-          editor.insertHtml('<img src="' + link + '" alt="' + text + '">');         
-      }
-    },
-    allowedContent: 'iframe[width,height,src,frameborder,allowfullscreen]'
-  //},
-  
-  
-
-  /*b='image2';
-  CKEDITOR.plugins.add(b,{
-    init:function(editor){
-      editor.addCommand(b,a);
-      editor.addCommand( 'image2Dialog', new CKEDITOR.dialogCommand( 'image2Dialog' ) );
-      editor.ui.addButton('image2',{
-        label:'Insert Image',
-        icon: this.path + 'icons/icon.png',
-        command:b
-      });
-    }
-  });*/
-  
- 
-
-
-
+      
 CKEDITOR.config.syrinx_siteBase = "";
 
