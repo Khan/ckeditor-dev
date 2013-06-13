@@ -9,6 +9,7 @@ This plugin embeds a google spreadsheet in the page. command() controls what hap
 
       if(link != false && link != null)
       {
+          //#gid specifies which sheet in a multipage spreadsheet to embed. If it's unspecified, we assume the first sheet.
           if(link.indexOf('#gid'))
           {
               link2=link.split('#gid');
