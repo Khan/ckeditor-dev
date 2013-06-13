@@ -8,7 +8,6 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
 	// %REMOVE_START%
-	config.tabSpaces = 4;
 	config.plugins =
 		'about,' +
 		'a11yhelp,' +
@@ -65,26 +64,6 @@ CKEDITOR.editorConfig = function( config ) {
 		'toolbar,' +
 		'undo,' +
 		'wysiwygarea';
-
-		//added for widgets
-		config.extraPlugins = 'gglspreadsheet,youtube,pdfs,image2';
-        config.linkShowAdvancedTab = false;
-        config.linkShowTargetTab = false;
-        config.extraAllowedContent = 'img[*]';
-        config.toolbar = 'KhanToolbar';
-        
-        config.toolbar_KhanToolbar =   
-        [
-        [ 'Source' ],
-        [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ],
-        [ 'Format' ],
-        [ 'NumberedList','BulletedList','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ],
-        [ 'Link'  ],
-        [ 'Table', 'SpecialChar' ],
-        [ 'Image2', 'youtube', 'gglspreadsheet', 'pdfs' ]
-        ]
-        
-        config.format_tags = 'p;h1;h2;h3';
 		
 };
 
