@@ -609,7 +609,7 @@
 
 	function getPrivateToolbarGroups( editor ) {
 		return editor._.toolbarGroups || ( editor._.toolbarGroups = [
-            {name: 'document',     groups: [ 'mode', 'document', 'doctools' ] },
+            
             { name: 'document',     groups: [ 'mode', 'document', 'doctools' ] },
             { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
             { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
