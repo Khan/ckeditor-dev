@@ -1,0 +1,1 @@
+﻿CKEDITOR.plugins.setLang("pastetext","ja",{button:"プレーンテキスト貼り付け",title:"プレーンテキスト貼り付け"});
