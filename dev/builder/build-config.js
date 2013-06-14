@@ -44,7 +44,7 @@ var CKBUILDER_CONFIG = {
 		horizontalrule: 0,
 		htmlwriter: 1,
 		iframe: 0,
-		image: 1,
+		image: 0,
 		indent: 1,
 		justify: 1,
 		link: 1,
