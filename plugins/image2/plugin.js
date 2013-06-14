@@ -15,7 +15,20 @@ CKEDITOR.plugins.add( 'image2',
           command: 'image2Dialog'
       } );
       
-      CKEDITOR.dialog.add( 'image2Dialog', function( editor )
+      var allowed = 'img[alt,!src]{border-style,border-width,float,height,margin,margin-bottom,margin-left,margin-right,margin-top,width}',
+      required = 'img[alt,src]';
+      pluginName = 'image2Dialog';
+      
+      editor.addCommand( pluginName, new CKEDITOR.dialogCommand( pluginName, {
+      	allowedContent: allowed,
+      	requiredContent: required,
+      	contentTransformations: [
+      		[ 'img{width}: sizeToStyle', 'img[width]: sizeToAttribute' ],
+      		[ 'img{float}: alignmentToStyle', 'img[align]: alignmentToAttribute' ]
+      	]
+      } ) );
+      
+      CKEDITOR.dialog.add( pluginName, function( editor )
       {
       	return {
       		title : 'Image Properties',
