@@ -73,7 +73,7 @@ var CKBUILDER_CONFIG = {
 		tabletools: 1,
 		templates: 0,
 		toolbar: 1,
-		undo: 0,
+		undo: 1,
 		wysiwygarea: 1,
 		gglspreadsheet: 1,
         youtube: 1,

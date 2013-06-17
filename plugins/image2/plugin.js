@@ -46,7 +46,7 @@ CKEDITOR.plugins.add( 'image2',
                         	type : 'text',
                         	id : 'link',
                         	label : 'Image URL',
-                        	validate : CKEDITOR.dialog.validate.notEmpty( 'The Alternate Text field cannot be empty.' ),
+                        	validate : CKEDITOR.dialog.validate.notEmpty( 'The URL field cannot be empty.' ),
                         	required : true,
                             commit : function( data )
                             		{
@@ -111,6 +111,6 @@ CKEDITOR.plugins.add( 'image2',
       });
   }
 });
-      
+  
 CKEDITOR.config.syrinx_siteBase = "";
 

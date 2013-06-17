@@ -34,6 +34,7 @@ CKEDITOR.plugins.load = CKEDITOR.tools.override( CKEDITOR.plugins.load, function
 							requires = plugin && plugin.requires;
 
 						if ( !initialized[ pluginName ] ) {
+							// Register all icons eventually defined by this plugin.
 							if ( plugin.icons ) {
                                 // Register all icons eventually defined by this plugin.
 								var icons = plugin.icons.split( ',' );
