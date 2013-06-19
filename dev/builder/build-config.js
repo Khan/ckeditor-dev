@@ -41,7 +41,7 @@ var CKBUILDER_CONFIG = {
 		font: 0,
 		format: 1,
 		forms: 0,
-		horizontalrule: 0,
+		horizontalrule: 1,
 		htmlwriter: 1,
 		iframe: 0,
 		image: 0,
