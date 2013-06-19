@@ -15,7 +15,7 @@ CKEDITOR.plugins.add( 'image2',
           command: 'image2Dialog'
       } );
       
-      var allowed = 'img[alt,!src]{border-style,border-width,float,height,margin,margin-bottom,margin-left,margin-right,margin-top,width}',
+      var allowed = 'img[alt,!src]{border-style,border-width,float,height,margin,margin-bottom,margin-left,margin-right,margin-top,width,class}',
       required = 'img[alt,src]';
       pluginName = 'image2Dialog';
       
@@ -83,7 +83,6 @@ CKEDITOR.plugins.add( 'image2',
                                     	data.inline = this.getValue();
                                     }
                         }
-                        
       				]
       			}
       		],
