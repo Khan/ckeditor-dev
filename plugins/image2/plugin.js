@@ -15,7 +15,7 @@ CKEDITOR.plugins.add( 'image2',
           command: 'image2Dialog'
       } );
       
-      var allowed = 'img[alt,!src]{border-style,border-width,float,height,margin,margin-bottom,margin-left,margin-right,margin-top,width,class}',
+      var allowed = 'img[alt,!src]{border-style,border-width,float,height,margin,margin-bottom,margin-left,margin-right,margin-top,width,class, style}',
       required = 'img[alt,src]';
       pluginName = 'image2Dialog';
       
@@ -94,18 +94,22 @@ CKEDITOR.plugins.add( 'image2',
                 var html = '';
                 if(data.fullwidth)
                 {
-                    html='<img src="' + data.link + '" alt="' + data.text + '" width="100%" >';
+                    html='<img src="' + data.link + '" alt="' + data.text + '" width="100%" ';
                 }
                 else
                 {
-                    html='<img src="' + data.link + '" alt="' + data.text + '" >';               
+                    html='<img src="' + data.link + '" alt="' + data.text + '"';               
                 }
                 if(!data.inline)
                 {
-                    html='</p> <p>'+html+'</p> <p>';
+                    html='<br>'+html+'><br>';
+                }
+                else
+                {
+                    html=html+' style="float:left">';
                 }
                 editor.insertHtml(html);
-             },
+             }
         };
       });
   }
