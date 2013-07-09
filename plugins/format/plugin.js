@@ -144,7 +144,7 @@ CKEDITOR.config.format_div = { element: 'div' };
  * @cfg {Object} [format_pre={ element: 'pre' }]
  * @member CKEDITOR.config
  */
-CKEDITOR.config.format_pre = { element: 'pre' };
+CKEDITOR.config.format_pre = { element: 'pre', attributes: { 'class': 'code' } };
 
 /**
  * The style definition to be used to apply the `'Address'` format.

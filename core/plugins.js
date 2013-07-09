@@ -28,7 +28,6 @@ CKEDITOR.plugins.load = CKEDITOR.tools.override( CKEDITOR.plugins.load, function
 		var loadPlugins = function( names ) {
 				originalLoad.call( this, names, function( plugins ) {
 					CKEDITOR.tools.extend( allPlugins, plugins );
-
 					var requiredPlugins = [];
 					for ( var pluginName in plugins ) {
 						var plugin = plugins[ pluginName ],
@@ -37,6 +36,7 @@ CKEDITOR.plugins.load = CKEDITOR.tools.override( CKEDITOR.plugins.load, function
 						if ( !initialized[ pluginName ] ) {
 							// Register all icons eventually defined by this plugin.
 							if ( plugin.icons ) {
+                                // Register all icons eventually defined by this plugin.
 								var icons = plugin.icons.split( ',' );
 								for ( var ic = 0 ; ic < icons.length ; ic++ ) {
 									CKEDITOR.skin.addIcon( icons[ ic ], plugin.path + 'icons/' + icons[ ic ] + '.png' );
