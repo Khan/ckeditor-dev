@@ -16,7 +16,7 @@ CKEDITOR.plugins.add( 'image2',
           command: 'image2Dialog'
       } );
 
-      var allowed = 'img[alt,!src]{border-style,border-width,float,height,margin,margin-bottom,margin-left,margin-right,margin-top,width,class, style}',
+      var allowed = 'img[alt,!src]{border-style,border-width,float,height,margin,margin-bottom,margin-left,margin-right,margin-top,width,class,style}; span[class](*)';
       required = 'img[alt,src]';
       pluginName = 'image2Dialog';
       
@@ -52,6 +52,16 @@ CKEDITOR.plugins.add( 'image2',
                             commit : function( data )
                             		{
                             			data.link = this.getValue();
+                            		}
+                        },
+                        {
+                        	type : 'text',
+                        	id : 'caption',
+                        	label : 'Image caption  (leave blank if you don\'t want to set a caption)',
+                        	required : false,
+                            commit : function( data )
+                            		{
+                            			data.caption = this.getValue();
                             		}
                         },
                         {
@@ -92,24 +102,15 @@ CKEDITOR.plugins.add( 'image2',
                 var dialog = this,
                 	    data = {};
                 this.commitContent( data );
-                var html = '';
-                if(data.fullwidth)
-                {
-                    html='<img src="' + data.link + '" alt="' + data.text + '" width="100%" ';
-                }
-                else
-                {
-                    html='<img src="' + data.link + '" alt="' + data.text + '"';               
-                }
-                if(!data.inline)
-                {
-                    html='<br>'+html+'><br>';
-                }
-                else
-                {
-                    html=html+' style="float:left">';
-                }
-                editor.insertHtml(html);
+                var wrapper = data.inline ? "span" : "p";
+                var width = data.fullwidth ? ' width="100%"' : '';
+                var caption = data.caption ? ('<span class="image-caption">' + data.caption + '</span>') : '';
+                html = '<' + wrapper + ' class="image-wrapper">' +
+                    '<img src="' + data.link + '" alt="' + data.text + '" ' + width + '>' +
+                    caption +
+                    '</' + wrapper + '>';
+        
+                editor.insertHtml(html, "unfiltered_html");
              }
         };
       });
