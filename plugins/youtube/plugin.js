@@ -38,12 +38,12 @@ CKEDITOR.plugins.add( 'youtube',
                         {
                         	type : 'text',
                         	id : 'link',
-                        	label : 'Youtube URL',
-                        	validate : CKEDITOR.dialog.validate.notEmpty( 'The URL field cannot be empty.' ),
+                        	label : 'Youtube ID',
+                        	validate : CKEDITOR.dialog.validate.notEmpty( 'The ID field cannot be empty.' ),
                         	required : true,
                             commit : function( data )
                             		{
-                            			data.link = this.getValue();
+                            			data.youtubeId = this.getValue();
                             		}
                         }
       				]
@@ -54,20 +54,9 @@ CKEDITOR.plugins.add( 'youtube',
                 var dialog = this,
                 	    data = {};
                 this.commitContent( data );
-                if(data.link)
+                if(data.youtubeId)
                 {
-                    //if the user takes the link from the 'share' tab on youtube, this case will display it correctly
-                    if(data.link.indexOf("watch?v=") == -1)
-                    {
-                        editor.insertHtml('<iframe width="560" height="315" src="' + data.link + '?rel=0" frameborder="0" allowfullscreen></iframe>');
-                    }
-                    //otherwise, if the user copies the url directly from the page, this will display it correctly. 
-                    else
-                    {
-                        var links = data.link.split("watch?v=")
-                        editor.insertHtml("<iframe width='560' height='315' src='" + links[0]+ "embed/"+ links[1] + "?rel=0' frameborder='0' allowfullscreen></iframe>");
-                    }
-          
+                    editor.insertHtml('<iframe width="560" height="315" src="//www.youtube.com/embed/' + data.youtubeId + '?rel=0" frameborder="0" allowfullscreen></iframe>');
                 }
              }
         };
