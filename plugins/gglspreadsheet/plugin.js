@@ -61,11 +61,11 @@ CKEDITOR.plugins.add( 'gglspreadsheet',
                     if(data.link.indexOf('#gid'))
                     {
                         link2=data.link.split('#gid');
-                        editor.insertHtml("<iframe width='100%' height='400' frameborder='0' src='" + link2[0] + "&output=html&chrome=false#gid" + link2[1] + "'></iframe>");
+                        editor.insertHtml("<iframe width='100%' height='600' frameborder='0' src='" + link2[0] + "&output=html&chrome=false#gid" + link2[1] + "'></iframe>");
                     }
                     else
                     {
-                        editor.insertHtml("<iframe width='100%' height='400' frameborder='0' src='" + data.link + "&output=html&chrome=false#gid=0'></iframe>");
+                        editor.insertHtml("<iframe width='100%' height='600' frameborder='0' src='" + data.link + "&output=html&chrome=false#gid=0'></iframe>");
                     }
                 }
              }

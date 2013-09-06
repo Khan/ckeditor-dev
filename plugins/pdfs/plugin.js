@@ -57,7 +57,7 @@ CKEDITOR.plugins.add( 'pdfs',
                 this.commitContent( data );
                 if(data.link)
                 {
-                    editor.insertHtml('<iframe embed src="'+data.link+'" width="900" height="1065"></iframe>');
+                    editor.insertHtml('<iframe embed src="'+data.link+'" width="100%" height="600"></iframe>');
                 }
              }
         };
