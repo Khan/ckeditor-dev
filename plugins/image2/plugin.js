@@ -16,7 +16,7 @@ CKEDITOR.plugins.add( 'image2',
           command: 'image2Dialog'
       } );
 
-      var allowed = 'img[alt,!src]{border-style,border-width,float,height,margin,margin-bottom,margin-left,margin-right,margin-top,width,class,style}; span[class](*)';
+      var allowed = 'img[alt,!src]{border-style,border-width,float,height,margin,margin-bottom,margin-left,margin-right,margin-top,width,class,style}; span[class](*);';
       required = 'img[alt,src]';
       pluginName = 'image2Dialog';
       
@@ -102,13 +102,13 @@ CKEDITOR.plugins.add( 'image2',
                 var dialog = this,
                 	    data = {};
                 this.commitContent( data );
-                var wrapper = data.inline ? "span" : "p";
+                var wrapperClass = data.inline ? "inline-image" : "block-image";
                 var width = data.fullwidth ? ' width="100%"' : '';
                 var caption = data.caption ? ('<span class="image-caption">' + data.caption + '</span>') : '';
-                html = '<' + wrapper + ' class="image-wrapper">' +
+                html = '<span class="image-wrapper ' + wrapperClass + '">' +
                     '<img src="' + data.link + '" alt="' + data.text + '" ' + width + '>' +
                     caption +
-                    '</' + wrapper + '>';
+                    '</span>';
         
                 editor.insertHtml(html, "unfiltered_html");
              }
