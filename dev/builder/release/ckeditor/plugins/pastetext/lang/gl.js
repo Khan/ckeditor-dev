@@ -1,1 +1,0 @@
-﻿CKEDITOR.plugins.setLang("pastetext","gl",{button:"Pegar como texto plano",title:"Pegar como texto plano"});
