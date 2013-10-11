@@ -1,1 +1,0 @@
-﻿CKEDITOR.plugins.setLang("blockquote","km",{toolbar:"Block Quote"});
