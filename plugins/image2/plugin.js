@@ -8,7 +8,7 @@ CKEDITOR.plugins.add( 'image2',
 	init: function( editor )
 	{
       editor.addCommand( 'image2Dialog', new CKEDITOR.dialogCommand( 'image2Dialog' ) );
-      
+
       editor.ui.addButton( 'Image2',
       {
           label:'Insert Image',
@@ -19,7 +19,7 @@ CKEDITOR.plugins.add( 'image2',
       var allowed = 'img[alt,!src]{border-style,border-width,float,height,margin,margin-bottom,margin-left,margin-right,margin-top,width,class,style}; span[class](*);';
       required = 'img[alt,src]';
       pluginName = 'image2Dialog';
-      
+
       editor.addCommand( pluginName, new CKEDITOR.dialogCommand( pluginName, {
       	allowedContent: allowed,
       	requiredContent: required,
@@ -28,7 +28,7 @@ CKEDITOR.plugins.add( 'image2',
       		[ 'img{float}: alignmentToStyle', 'img[align]: alignmentToAttribute' ]
       	]
       } ) );
-      
+
       CKEDITOR.dialog.add( pluginName, function( editor )
       {
       	return {
@@ -71,7 +71,7 @@ CKEDITOR.plugins.add( 'image2',
                         	required : false,
                             commit : function( data )
                             		{
-                            			data.text = this.getValue();
+                            			data.text = this.getValue().replace(/"/g, '&quot;');
                             		}
                         },
                         {
@@ -109,7 +109,7 @@ CKEDITOR.plugins.add( 'image2',
                     '<img src="' + data.link + '" alt="' + data.text + '" ' + width + '>' +
                     caption +
                     '</span>';
-        
+
                 editor.insertHtml(html, "unfiltered_html");
              }
         };
