@@ -65,6 +65,7 @@ var CKBUILDER_CONFIG = {
 		showblocks: 0,
 		showborders: 1,
 		smiley: 0,
+		sourcedialog: 1,
 		sourcearea: 1,
 		specialchar: 1,
 		stylescombo: 0,
