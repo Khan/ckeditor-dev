@@ -3,6 +3,7 @@ This plugin embeds a youtube video in the page. command() controls what happens 
 */
 CKEDITOR.plugins.add( 'youtube',
 {
+    icons: 'youtube',
 	init: function( editor )
 	{
       editor.addCommand( 'youtubeDialog', new CKEDITOR.dialogCommand( 'youtubeDialog' ) );
@@ -10,7 +11,6 @@ CKEDITOR.plugins.add( 'youtube',
       editor.ui.addButton( 'Youtube',
       {
           label:'Embed Youtube Video',
-          icon: this.path + 'icon.png',
           command: 'youtubeDialog'
       } );
       

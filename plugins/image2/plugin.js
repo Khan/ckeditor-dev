@@ -5,6 +5,7 @@ The original editor was so complex it was easier to start from scratch. */
 
 CKEDITOR.plugins.add( 'image2',
 {
+    icons: 'image2',
 	init: function( editor )
 	{
       editor.addCommand( 'image2Dialog', new CKEDITOR.dialogCommand( 'image2Dialog' ) );
@@ -12,7 +13,6 @@ CKEDITOR.plugins.add( 'image2',
       editor.ui.addButton( 'Image2',
       {
           label:'Insert Image',
-          icon: this.path + 'image.png',
           command: 'image2Dialog'
       } );
 

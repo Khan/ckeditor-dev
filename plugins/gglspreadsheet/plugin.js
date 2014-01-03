@@ -4,6 +4,7 @@ This plugin embeds a google spreadsheet in the page. command() controls what hap
 
 CKEDITOR.plugins.add( 'gglspreadsheet',
 {
+    icons: "gglspreadsheet",
 	init: function( editor )
 	{
       editor.addCommand( 'gglspreadsheetDialog', new CKEDITOR.dialogCommand( 'gglspreadsheetDialog' ) );
@@ -11,7 +12,6 @@ CKEDITOR.plugins.add( 'gglspreadsheet',
       editor.ui.addButton( 'Gglspreadsheet',
       {
           label:'Embed Google Spreadsheet',
-          icon: this.path + 'spreadsheet.png',
           command: 'gglspreadsheetDialog'
       } );
       
