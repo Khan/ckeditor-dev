@@ -51,7 +51,8 @@ CKEDITOR.plugins.add(pluginName, {
 
     onLoad: function() {
         // Basic styling for the placeholder element
-        CKEDITOR.addCss("img." + pluginName + " {" +
+        CKEDITOR.addCss("img[data-cke-real-element-type='" + pluginName +
+                "'] {" +
             "background-color: #EEE;" +
             // Add an image that reads 'Scratchpad' to make it easier to
             // understand what the element represents.
