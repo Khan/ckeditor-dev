@@ -4,7 +4,9 @@
  */
 
 /* All plugins that were disabled (set to zero) were removed because we did not want content creators to have that functionality.
-gglspreadsheet was added for our googlespreadsheet embedding plugin, youtube for a youtube embedding plugin,
+gglspreadsheet was added for our googlespreadsheet embedding plugin,
+youtube for a youtube embedding plugin,
+scratchpad for a scratchpad embedding plugin,
 pdfs for our pdf embed plugin, and image2 for a simpler image plugin
 */
 
@@ -79,6 +81,7 @@ var CKBUILDER_CONFIG = {
 		gglspreadsheet: 1,
         youtube: 1,
         pdfs: 1,
-        image2: 1
+        image2: 1,
+        scratchpad: 1
 	}
 };
