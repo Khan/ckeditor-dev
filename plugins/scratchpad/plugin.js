@@ -20,7 +20,7 @@ CKEDITOR.plugins.add(pluginName, {
         var plugin = this;
         var allowed = "iframe[!src,!height,!width,scrolling,frameBorder](" +
             pluginName + ")";
-        var lang = editor.lang.fakeobjects
+        var lang = editor.lang.fakeobjects;
         lang[pluginName] = "Embedded Scratchpad";
 
         // Add a command that when executed opens up the scratchpad dialog
