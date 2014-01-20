@@ -8,14 +8,12 @@ var pluginName = "latex";
 
 
 CKEDITOR.plugins.add(pluginName, {
-    requires: "dialog,fakeobjects",
+    requires: "dialog",
     icons: pluginName,
 
     init: function(editor) {
         var plugin = this;
-        var allowed = "code[class(" + pluginName + ")";
-        var lang = editor.lang.fakeobjects;
-        lang[pluginName] = "LaTeX";
+        var allowed = "code(" + pluginName + ")";
 
         // Add a command that when executed opens up the dialog
         editor.addCommand(
@@ -27,7 +25,7 @@ CKEDITOR.plugins.add(pluginName, {
 
         // Add a toolbar button (named 'LaTeX') that executes the plugin
         editor.ui.addButton("LaTeX", {
-            label: lang[pluginName],
+            label: "LaTeX",
             command: pluginName
         });
 
