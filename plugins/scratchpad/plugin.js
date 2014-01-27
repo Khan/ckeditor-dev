@@ -7,7 +7,7 @@
 var pluginName = "scratchpad";
 
 // Embed dimensions
-var defaultWidth = "100%";
+var defaultWidth = "790";
 var defaultHeight = "440";
 var canvasWidth = "400";
 var canvasHeight = "400";
