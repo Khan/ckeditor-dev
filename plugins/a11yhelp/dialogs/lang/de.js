@@ -1,6 +1,6 @@
 ﻿/**
- * @license Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.html or http://ckeditor.com/license
+ * @license Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
 CKEDITOR.plugins.setLang( 'a11yhelp', 'de', {
@@ -68,12 +68,12 @@ CKEDITOR.plugins.setLang( 'a11yhelp', 'de', {
 			legend: 'Drücken Sie ${toolbarCollapse}'
 		},
 			{
-			name: ' Access previous focus space command', // MISSING
-			legend: 'Press ${accessPreviousSpace} to access the closest unreachable focus space before the caret, for example: two adjacent HR elements. Repeat the key combination to reach distant focus spaces.' // MISSING
+			name: 'Zugang bisheriger Fokussierung Raumbefehl ',
+			legend: 'Drücken Sie ${accessPreviousSpace}  auf den am nächsten nicht erreichbar Fokus-Abstand vor die Einfügemarke zugreifen: zwei benachbarte HR-Elemente. Wiederholen Sie die Tastenkombination um entfernte Fokusräume zu erreichen. '
 		},
 			{
-			name: ' Access next focus space command', // MISSING
-			legend: 'Press ${accessNextSpace} to access the closest unreachable focus space after the caret, for example: two adjacent HR elements. Repeat the key combination to reach distant focus spaces.' // MISSING
+			name: 'Zugang nächster Schwerpunkt Raumbefehl ',
+			legend: 'Drücken Sie $ { accessNextSpace }, um den nächsten unerreichbar Fokus Leerzeichen nach dem Cursor zum Beispiel auf: zwei benachbarten HR Elemente. Wiederholen Sie die Tastenkombination zum fernen Fokus Bereiche zu erreichen. '
 		},
 			{
 			name: 'Eingabehilfen',
@@ -81,5 +81,67 @@ CKEDITOR.plugins.setLang( 'a11yhelp', 'de', {
 		}
 		]
 	}
-	]
-});
+	],
+	backspace: 'Backspace', // MISSING
+	tab: 'Tab', // MISSING
+	enter: 'Enter', // MISSING
+	shift: 'Umschalt',
+	ctrl: 'Strg',
+	alt: 'Alt',
+	pause: 'Pause',
+	capslock: 'Caps Lock', // MISSING
+	escape: 'Escape',
+	pageUp: 'Page Up', // MISSING
+	pageDown: 'Page Down', // MISSING
+	end: 'Ende',
+	home: 'Home', // MISSING
+	leftArrow: 'Left Arrow', // MISSING
+	upArrow: 'Up Arrow', // MISSING
+	rightArrow: 'Right Arrow', // MISSING
+	downArrow: 'Down Arrow', // MISSING
+	insert: 'Einfügen',
+	'delete': 'Entfernen',
+	leftWindowKey: 'Linke Windowstaste',
+	rightWindowKey: 'Rechte Windowstaste',
+	selectKey: 'Taste auswählen',
+	numpad0: 'Ziffernblock 0',
+	numpad1: 'Ziffernblock 1',
+	numpad2: 'Ziffernblock 2',
+	numpad3: 'Ziffernblock 3',
+	numpad4: 'Ziffernblock 4',
+	numpad5: 'Ziffernblock 5',
+	numpad6: 'Ziffernblock 6',
+	numpad7: 'Ziffernblock 7',
+	numpad8: 'Ziffernblock 8',
+	numpad9: 'Ziffernblock 9',
+	multiply: 'Multiply', // MISSING
+	add: 'Add', // MISSING
+	subtract: 'Subtract', // MISSING
+	decimalPoint: 'Decimal Point', // MISSING
+	divide: 'Divide', // MISSING
+	f1: 'F1',
+	f2: 'F2',
+	f3: 'F3',
+	f4: 'F4',
+	f5: 'F5',
+	f6: 'F6',
+	f7: 'F7',
+	f8: 'F8',
+	f9: 'F9',
+	f10: 'F10',
+	f11: 'F11',
+	f12: 'F12',
+	numLock: 'Num Lock', // MISSING
+	scrollLock: 'Scroll Lock', // MISSING
+	semiColon: 'Semikolon',
+	equalSign: 'Gleichheitszeichen',
+	comma: 'Komma',
+	dash: 'Bindestrich',
+	period: 'Punkt',
+	forwardSlash: 'Forward Slash', // MISSING
+	graveAccent: 'Grave Accent', // MISSING
+	openBracket: 'Open Bracket', // MISSING
+	backSlash: 'Backslash', // MISSING
+	closeBracket: 'Close Bracket', // MISSING
+	singleQuote: 'Single Quote' // MISSING
+} );

@@ -1,13 +1,13 @@
 ﻿/**
- * @license Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.html or http://ckeditor.com/license
+ * @license Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
 CKEDITOR.plugins.add( 'floatpanel', {
 	requires: 'panel'
-});
+} );
 
-(function() {
+( function() {
 	var panels = {};
 
 	function getPanel( editor, doc, parentElement, definition, level ) {
@@ -19,10 +19,10 @@ CKEDITOR.plugins.add( 'floatpanel', {
 			panel = panels[ key ] = new CKEDITOR.ui.panel( doc, definition );
 			panel.element = parentElement.append( CKEDITOR.dom.element.createFromHtml( panel.render( editor ), doc ) );
 
-			panel.element.setStyles({
+			panel.element.setStyles( {
 				display: 'none',
 				position: 'absolute'
-			});
+			} );
 		}
 
 		return panel;
@@ -37,7 +37,7 @@ CKEDITOR.plugins.add( 'floatpanel', {
 	 * @class
 	 * @todo
 	 */
-	CKEDITOR.ui.floatPanel = CKEDITOR.tools.createClass({
+	CKEDITOR.ui.floatPanel = CKEDITOR.tools.createClass( {
 		/**
 		 * Creates a floatPanel class instance.
 		 *
@@ -64,10 +64,6 @@ CKEDITOR.plugins.add( 'floatpanel', {
 			// Disable native browser menu. (#4825)
 			element.disableContextMenu();
 
-			// Floating panels are placed outside the main editor UI, so we must
-			// make them application regions as well. (#9543)
-			element.setAttribute( 'role', 'application' );
-
 			this.element = element;
 
 			this._ = {
@@ -84,8 +80,12 @@ CKEDITOR.plugins.add( 'floatpanel', {
 
 			editor.on( 'mode', hide );
 			editor.on( 'resize', hide );
+
 			// Window resize doesn't cause hide on blur. (#9800)
-			doc.getWindow().on( 'resize', hide );
+			// [iOS] Poping up keyboard triggers window resize
+			// which leads to undesired panel hides.
+			if ( !CKEDITOR.env.iOS )
+				doc.getWindow().on( 'resize', hide );
 
 			// We need a wrapper because events implementation doesn't allow to attach
 			// one listener more than once for the same event on the same object.
@@ -137,9 +137,10 @@ CKEDITOR.plugins.add( 'floatpanel', {
 			 *
 			 * @param {Number} [offsetX=0]
 			 * @param {Number} [offsetY=0]
+			 * @param {Function} [callback] A callback function executed when block positioning is done.
 			 * @todo what do exactly these params mean (especially corner)?
 			 */
-			showBlock: function( name, offsetParent, corner, offsetX, offsetY ) {
+			showBlock: function( name, offsetParent, corner, offsetX, offsetY, callback ) {
 				var panel = this._.panel,
 					block = panel.showBlock( name );
 
@@ -148,6 +149,7 @@ CKEDITOR.plugins.add( 'floatpanel', {
 				// Record from where the focus is when open panel.
 				var editable = this._.editor.editable();
 				this._.returnFocus = editable.hasFocus ? editable : new CKEDITOR.dom.element( CKEDITOR.document.$.activeElement );
+				this._.hideTimeout = 0;
 
 				var element = this.element,
 					iframe = this._.iframe,
@@ -173,11 +175,11 @@ CKEDITOR.plugins.add( 'floatpanel', {
 				// Memorize offsetParent by it's ID.
 				this._.panel._.offsetParentId = offsetParent.getId();
 
-				element.setStyles({
+				element.setStyles( {
 					top: top + 'px',
 					left: 0,
 					display: ''
-				});
+				} );
 
 				// Don't use display or visibility style because we need to
 				// calculate the rendering layout later and focus the element.
@@ -198,7 +200,6 @@ CKEDITOR.plugins.add( 'floatpanel', {
 					CKEDITOR.event.useCapture = true;
 
 					focused.on( 'blur', function( ev ) {
-
 						// As we are using capture to register the listener,
 						// the blur event may get fired even when focusing
 						// inside the window itself, so we must ensure the
@@ -207,6 +208,16 @@ CKEDITOR.plugins.add( 'floatpanel', {
 							return;
 
 						if ( this.visible && !this._.activeChild ) {
+							// [iOS] Allow hide to be prevented if touch is bound
+							// to any parent of the iframe blur happens before touch (#10714).
+							if ( CKEDITOR.env.iOS ) {
+								if ( !this._.hideTimeout )
+									this._.hideTimeout = CKEDITOR.tools.setTimeout( doHide, 0, this );
+							} else
+								doHide.call( this );
+						}
+
+						function doHide() {
 							// Panel close is caused by user's navigating away the focus, e.g. click outside the panel.
 							// DO NOT restore focus in this case.
 							delete this._.returnFocus;
@@ -219,6 +230,23 @@ CKEDITOR.plugins.add( 'floatpanel', {
 						this.hideChild();
 						this.allowBlur( true );
 					}, this );
+
+					// [iOS] if touch is bound to any parent of the iframe blur
+					// happens twice before touchstart and before touchend (#10714).
+					if ( CKEDITOR.env.iOS ) {
+						// Prevent false hiding on blur.
+						// We don't need to return focus here because touchend will fire anyway.
+						// If user scrolls and pointer gets out of the panel area touchend will also fire.
+						focused.on( 'touchstart', function() {
+							clearTimeout( this._.hideTimeout );
+						}, this );
+
+						// Set focus back to handle blur and hide panel when needed.
+						focused.on( 'touchend', function() {
+							this._.hideTimeout = 0;
+							this.focus();
+						}, this );
+					}
 
 					CKEDITOR.event.useCapture = false;
 
@@ -358,19 +386,29 @@ CKEDITOR.plugins.add( 'floatpanel', {
 							activePanel.onHide && activePanel.onHide.call( this, 1 );
 						innerElement.setCustomData( 'activePanel', this );
 
-						element.setStyles({
+						element.setStyles( {
 							top: top + 'px',
 							left: left + 'px'
-						});
+						} );
 						element.setOpacity( 1 );
+
+						callback && callback();
 					}, this );
 
 					panel.isLoaded ? panelLoad() : panel.onLoad = panelLoad;
 
-					// Set the panel frame focus, so the blur event gets fired.
 					CKEDITOR.tools.setTimeout( function() {
+						var scrollTop = CKEDITOR.env.webkit && CKEDITOR.document.getWindow().getScrollPosition().y;
 
+						// Focus the panel frame first, so blur gets fired.
 						this.focus();
+
+						// Focus the block now.
+						block.element.focus();
+
+						// #10623, #10951 - restore the viewport's scroll position after focusing list element.
+						if ( CKEDITOR.env.webkit )
+							CKEDITOR.document.getBody().$.scrollTop = scrollTop;
 
 						// We need this get fired manually because of unfired focus() function.
 						this.allowBlur( true );
@@ -381,7 +419,6 @@ CKEDITOR.plugins.add( 'floatpanel', {
 
 				if ( this.onShow )
 					this.onShow.call( this );
-
 			},
 
 			/**
@@ -521,7 +558,7 @@ CKEDITOR.plugins.add( 'floatpanel', {
 				}
 			}
 		}
-	});
+	} );
 
 	CKEDITOR.on( 'instanceDestroyed', function() {
 		var isLastInstance = CKEDITOR.tools.isEmpty( CKEDITOR.instances );
@@ -539,4 +576,4 @@ CKEDITOR.plugins.add( 'floatpanel', {
 		isLastInstance && ( panels = {} );
 
 	} );
-})();
+} )();

@@ -1,6 +1,6 @@
 ﻿/**
- * @license Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.html or http://ckeditor.com/license
+ * @license Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
 /**
@@ -134,6 +134,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 	 *		element.addClass( 'classB' ); // <div class="classA classB">
 	 *		element.addClass( 'classA' ); // <div class="classA classB">
 	 *
+	 * @chainable
 	 * @param {String} className The name of the class to be added.
 	 */
 	addClass: function( className ) {
@@ -144,6 +145,8 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 				c += ' ' + className;
 		}
 		this.$.className = c || className;
+
+		return this;
 	},
 
 	/**
@@ -250,16 +253,23 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 	},
 
 	/**
-	 * @todo
+	 * Appends a `<br>` filler element to this element if the filler is not present already.
+	 * By default filler is appended only if {@link CKEDITOR.env#needsBrFiller} is `true`,
+	 * however when `force` is set to `true` filler will be appended regardless of the environment.
+	 *
+	 * @param {Boolean} [force] Append filler regardless of the environment.
 	 */
-	appendBogus: function() {
+	appendBogus: function( force ) {
+		if ( !force && !CKEDITOR.env.needsBrFiller )
+			return;
+
 		var lastChild = this.getLast();
 
 		// Ignore empty/spaces text.
 		while ( lastChild && lastChild.type == CKEDITOR.NODE_TEXT && !CKEDITOR.tools.rtrim( lastChild.getText() ) )
 			lastChild = lastChild.getPrevious();
 		if ( !lastChild || !lastChild.is || !lastChild.is( 'br' ) ) {
-			var bogus = CKEDITOR.env.opera ? this.getDocument().createText( '' ) : this.getDocument().createElement( 'br' );
+			var bogus = this.getDocument().createElement( 'br' );
 
 			CKEDITOR.env.gecko && bogus.setAttribute( 'type', '_moz' );
 
@@ -329,7 +339,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 	 * @param  {Boolean} defer Whether to asynchronously defer the
 	 * execution by 100 ms.
 	 */
-	focus: (function() {
+	focus: ( function() {
 		function exec() {
 			// IE throws error if the element is not visible.
 			try {
@@ -343,7 +353,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 			else
 				exec.call( this );
 		};
-	})(),
+	} )(),
 
 	/**
 	 * Gets the inner HTML of this element.
@@ -408,17 +418,29 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 	 * @param {String} html The HTML to be set for this element.
 	 * @returns {String} The inserted HTML.
 	 */
-	setHtml: (function() {
-		var standard = function( html ) {
-			return ( this.$.innerHTML = html );
-		};
-
-		if ( CKEDITOR.env.ie && CKEDITOR.env.version < 9 ) {
+	setHtml: ( CKEDITOR.env.ie && CKEDITOR.env.version < 9 ) ?
 			// old IEs throws error on HTML manipulation (through the "innerHTML" property)
 			// on the element which resides in an DTD invalid position,  e.g. <span><div></div></span>
 			// fortunately it can be worked around with DOM manipulation.
-			return function( html ) {
-				try { return standard.call( this, html ); }
+			function( html ) {
+				try {
+					var $ = this.$;
+
+					// Fix the case when setHtml is called on detached element.
+					// HTML5 shiv used for document in which this element was created
+					// won't affect that detached element. So get document fragment with
+					// all HTML5 elements enabled and set innerHTML while this element is appended to it.
+					if ( this.getParent() )
+						return ( $.innerHTML = html );
+					else {
+						var $frag = this.getDocument()._getHtml5ShivFrag();
+						$frag.appendChild( $ );
+						$.innerHTML = html;
+						$frag.removeChild( $ );
+
+						return html;
+					}
+				}
 				catch ( e ) {
 					this.$.innerHTML = '';
 
@@ -426,15 +448,16 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 					temp.$.innerHTML = html;
 
 					var children = temp.getChildren();
-					while( children.count() )
+					while ( children.count() )
 						this.append( children.getItem( 0 ) );
 
 					return html;
 				}
-			};
-		} else
-			return standard;
-	})(),
+			}
+		:
+			function( html ) {
+				return ( this.$.innerHTML = html );
+			},
 
 	/**
 	 * Sets the element contents as plain text.
@@ -467,12 +490,12 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 	 * @param {String} name The attribute name.
 	 * @returns {String} The attribute value or null if not defined.
 	 */
-	getAttribute: (function() {
+	getAttribute: ( function() {
 		var standard = function( name ) {
 				return this.$.getAttribute( name, 2 );
 			};
 
-		if ( CKEDITOR.env.ie && ( CKEDITOR.env.ie7Compat || CKEDITOR.env.ie6Compat ) ) {
+		if ( CKEDITOR.env.ie && ( CKEDITOR.env.ie7Compat || CKEDITOR.env.quirks ) ) {
 			return function( name ) {
 				switch ( name ) {
 					case 'class':
@@ -526,7 +549,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 			};
 		} else
 			return standard;
-	})(),
+	} )(),
 
 	/**
 	 * Gets the nodes list containing all children of this element.
@@ -695,7 +718,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 
 		return ( this.getName = function() {
 			return nodeName;
-		})();
+		} )();
 	},
 
 	/**
@@ -865,12 +888,12 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 
 		// Webkit and Opera report non-zero offsetHeight despite that
 		// element is inside an invisible iframe. (#4542)
-		if ( isVisible && ( CKEDITOR.env.webkit || CKEDITOR.env.opera ) ) {
+		if ( isVisible && CKEDITOR.env.webkit ) {
 			elementWindow = this.getWindow();
 
-			if ( !elementWindow.equals( CKEDITOR.document.getWindow() ) && ( elementWindowFrame = elementWindow.$.frameElement ) ) {
+			if ( !elementWindow.equals( CKEDITOR.document.getWindow() ) && ( elementWindowFrame = elementWindow.$.frameElement ) )
 				isVisible = new CKEDITOR.dom.element( elementWindowFrame ).isVisible();
-			}
+
 		}
 
 		return !!isVisible;
@@ -892,9 +915,9 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 			if ( child.type == CKEDITOR.NODE_ELEMENT && child.data( 'cke-bookmark' ) )
 				continue;
 
-			if ( child.type == CKEDITOR.NODE_ELEMENT && !child.isEmptyInlineRemoveable() || child.type == CKEDITOR.NODE_TEXT && CKEDITOR.tools.trim( child.getText() ) ) {
+			if ( child.type == CKEDITOR.NODE_ELEMENT && !child.isEmptyInlineRemoveable() || child.type == CKEDITOR.NODE_TEXT && CKEDITOR.tools.trim( child.getText() ) )
 				return false;
-			}
+
 		}
 		return true;
 	},
@@ -911,7 +934,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 	 * @method
 	 * @returns {Boolean} True if the element has attributes.
 	 */
-	hasAttributes: CKEDITOR.env.ie && ( CKEDITOR.env.ie7Compat || CKEDITOR.env.ie6Compat ) ?
+	hasAttributes: CKEDITOR.env.ie && ( CKEDITOR.env.ie7Compat || CKEDITOR.env.quirks ) ?
 		function() {
 			var attributes = this.$.attributes;
 
@@ -947,7 +970,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 				attrsNum = attrs.length;
 
 			// The _moz_dirty attribute might get into the element after pasting (#5455)
-			var execludeAttrs = { 'data-cke-expando':1,_moz_dirty:1 };
+			var execludeAttrs = { 'data-cke-expando': 1, _moz_dirty: 1 };
 
 			return attrsNum > 0 && ( attrsNum > 2 || !execludeAttrs[ attrs[ 0 ].nodeName ] || ( attrsNum == 2 && !execludeAttrs[ attrs[ 1 ].nodeName ] ) );
 		},
@@ -959,10 +982,19 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 	 * @param {String} name The attribute name.
 	 * @returns {Boolean} `true` if the specified attribute is defined.
 	 */
-	hasAttribute: (function() {
+	hasAttribute: ( function() {
 		function standard( name ) {
 			var $attr = this.$.attributes.getNamedItem( name );
-			return !!( $attr && $attr.specified );
+
+			if ( !$attr )
+				return false;
+			else if ( CKEDITOR.env.ie )
+				return $attr.specified;
+			else {
+				// On other browsers specified property is deprecated and return always true,
+				// but fortunately $.attributes contains only specified attributes.
+				return true;
+			}
 		}
 
 		return ( CKEDITOR.env.ie && CKEDITOR.env.version < 8 ) ?
@@ -975,7 +1007,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 
 			return standard.call( this, name );
 		} : standard;
-	})(),
+	} )(),
 
 	/**
 	 * Hides this element (sets `display: none`).
@@ -1022,7 +1054,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 	 * @method
 	 * @param {Boolean} [inlineOnly=true] Allow only inline elements to be merged.
 	 */
-	mergeSiblings: (function() {
+	mergeSiblings: ( function() {
 		function mergeElements( element, sibling, isNext ) {
 			if ( sibling && sibling.type == CKEDITOR.NODE_ELEMENT ) {
 				// Jumping over bookmark nodes and empty inline elements, e.g. <b><i></i></b>,
@@ -1064,7 +1096,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 			mergeElements( this, this.getNext(), true );
 			mergeElements( this, this.getPrevious() );
 		};
-	})(),
+	} )(),
 
 	/**
 	 * Shows this element (displays it).
@@ -1073,10 +1105,10 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 	 *		element.show();
 	 */
 	show: function() {
-		this.setStyles({
+		this.setStyles( {
 			display: '',
 			visibility: ''
-		});
+		} );
 	},
 
 	/**
@@ -1091,13 +1123,13 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 	 * @param {String} value The value to be set to the attribute.
 	 * @returns {CKEDITOR.dom.element} This element instance.
 	 */
-	setAttribute: (function() {
+	setAttribute: ( function() {
 		var standard = function( name, value ) {
 				this.$.setAttribute( name, value );
 				return this;
 			};
 
-		if ( CKEDITOR.env.ie && ( CKEDITOR.env.ie7Compat || CKEDITOR.env.ie6Compat ) ) {
+		if ( CKEDITOR.env.ie && ( CKEDITOR.env.ie7Compat || CKEDITOR.env.quirks ) ) {
 			return function( name, value ) {
 				if ( name == 'class' )
 					this.$.className = value;
@@ -1125,7 +1157,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 			};
 		} else
 			return standard;
-	})(),
+	} )(),
 
 	/**
 	 * Sets the value of several element attributes.
@@ -1169,12 +1201,12 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 	 * @method
 	 * @param {String} name The attribute name.
 	 */
-	removeAttribute: (function() {
+	removeAttribute: ( function() {
 		var standard = function( name ) {
 				this.$.removeAttribute( name );
 			};
 
-		if ( CKEDITOR.env.ie && ( CKEDITOR.env.ie7Compat || CKEDITOR.env.ie6Compat ) ) {
+		if ( CKEDITOR.env.ie && ( CKEDITOR.env.ie7Compat || CKEDITOR.env.quirks ) ) {
 			return function( name ) {
 				if ( name == 'class' )
 					name = 'className';
@@ -1186,7 +1218,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 			};
 		} else
 			return standard;
-	})(),
+	} )(),
 
 	/**
 	 * Removes all element's attributes or just given ones.
@@ -1299,7 +1331,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 		// For IE/Opera which doesn't support for the above CSS style,
 		// the unselectable="on" attribute only specifies the selection
 		// process cannot start in the element itself, and it doesn't inherit.
-		if ( CKEDITOR.env.ie || CKEDITOR.env.opera ) {
+		if ( CKEDITOR.env.ie ) {
 			this.setAttribute( 'unselectable', 'on' );
 
 			var element,
@@ -1541,9 +1573,8 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 		// 2. Otherwise be smart to scroll only the minimum amount;
 		// 3. Never cut at the top;
 		// 4. DO NOT scroll when already visible.
-		if ( lt.y < 0 || br.y > 0 ) {
+		if ( lt.y < 0 || br.y > 0 )
 			scrollBy( 0, alignToTop === true ? lt.y : alignToTop === false ? br.y : lt.y < 0 ? lt.y : br.y );
-		}
 
 		if ( hscroll && ( lt.x < 0 || br.x > 0 ) )
 			scrollBy( lt.x < 0 ? lt.x : br.x, 0 );
@@ -1646,8 +1677,9 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 
 			if ( attrName == 'checked' && ( attrValue = this.getAttribute( attrName ) ) )
 				dest.setAttribute( attrName, attrValue );
-			// IE BUG: value attribute is never specified even if it exists.
-			else if ( attribute.specified || ( CKEDITOR.env.ie && attribute.nodeValue && attrName == 'value' ) ) {
+			// IE contains not specified attributes in $.attributes so we need to check
+			// if elements attribute is specified using hasAttribute.
+			else if ( !CKEDITOR.env.ie || this.hasAttribute( attrName ) ) {
 				attrValue = this.getAttribute( attrName );
 				if ( attrValue === null )
 					attrValue = attribute.nodeValue;
@@ -1686,6 +1718,8 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 		this.getParent() && this.$.parentNode.replaceChild( newNode.$, this.$ );
 		newNode.$[ 'data-cke-expando' ] = this.$[ 'data-cke-expando' ];
 		this.$ = newNode.$;
+		// Bust getName's cache. (#8663)
+		delete this.getName;
 	},
 
 	/**
@@ -1697,7 +1731,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 	 * @param {Array/Number} indices The child index or array of child indices under the node.
 	 * @returns {CKEDITOR.dom.node} The specified DOM child under the current node. Null if child does not exist.
 	 */
-	getChild: (function() {
+	getChild: ( function() {
 		function getChild( rawNode, index ) {
 			var childNodes = rawNode.childNodes;
 
@@ -1717,7 +1751,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 
 			return rawNode ? new CKEDITOR.dom.node( rawNode ) : null;
 		};
-	})(),
+	} )(),
 
 	/**
 	 * Gets number of element's children.
@@ -1736,7 +1770,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 			// Cancel the browser context menu.
 			if ( !event.data.getTarget().hasClass( 'cke_enable_context_menu' ) )
 				event.data.preventDefault();
-		});
+		} );
 	},
 
 	/**
@@ -1800,8 +1834,127 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 		}
 
 		return null;
+	},
+
+	/**
+	 * Returns list of elements within this element that match specified `selector`.
+	 *
+	 * **Notes:**
+	 *
+	 *	* Not available in IE7.
+	 *	* Returned list is not a live collection (like a result of native `querySelectorAll`).
+	 *	* Unlike native `querySelectorAll` this method ensures selector contextualization. This is:
+	 *
+	 *			HTML:		'<body><div><i>foo</i></div></body>'
+	 *			Native:		div.querySelectorAll( 'body i' ) // ->		[ <i>foo</i> ]
+	 *			Method:		div.find( 'body i' ) // ->					[]
+	 *						div.find( 'i' ) // ->						[ <i>foo</i> ]
+	 *
+	 * @since 4.3
+	 * @param {String} selector
+	 * @returns {CKEDITOR.dom.nodeList}
+	 */
+	find: function( selector ) {
+		var removeTmpId = createTmpId( this ),
+			list = new CKEDITOR.dom.nodeList(
+				this.$.querySelectorAll( getContextualizedSelector( this, selector ) )
+			);
+
+		removeTmpId();
+
+		return list;
+	},
+
+	/**
+	 * Returns first element within this element that matches specified `selector`.
+	 *
+	 * **Notes:**
+	 *
+	 *	* Not available in IE7.
+	 *	* Unlike native `querySelectorAll` this method ensures selector contextualization. This is:
+	 *
+	 *			HTML:		'<body><div><i>foo</i></div></body>'
+	 *			Native:		div.querySelector( 'body i' ) // ->			<i>foo</i>
+	 *			Method:		div.findOne( 'body i' ) // ->				null
+	 *						div.findOne( 'i' ) // ->					<i>foo</i>
+	 *
+	 * @since 4.3
+	 * @param {String} selector
+	 * @returns {CKEDITOR.dom.element}
+	 */
+	findOne: function( selector ) {
+		var removeTmpId = createTmpId( this ),
+			found = this.$.querySelector( getContextualizedSelector( this, selector ) );
+
+		removeTmpId();
+
+		return found ? new CKEDITOR.dom.element( found ) : null;
+	},
+
+	/**
+	 * Traverse the DOM of this element (inclusive), executing a callback for
+	 * each node.
+	 *
+	 *		var element = CKEDITOR.dom.element.createFromHtml( '<div><p>foo<b>bar</b>bom</p></div>' );
+	 *		element.forEach( function( node ) {
+	 *			console.log( node );
+	 *		} );
+	 *		// Will log:
+	 *		// 1. <div> element,
+	 *		// 2. <p> element,
+	 *		// 3. "foo" text node,
+	 *		// 4. <b> element,
+	 *		// 5. "bar" text node,
+	 *		// 6. "bom" text node.
+	 *
+	 * @since 4.3
+	 * @param {Function} callback Function to be executed on every node.
+	 * If `callback` returns `false` descendants of the node will be ignored.
+	 * @param {CKEDITOR.htmlParser.node} callback.node Node passed as argument.
+	 * @param {Number} [type] If specified `callback` will be executed only on
+	 * nodes of this type.
+	 * @param {Boolean} [skipRoot] Don't execute `callback` on this element.
+	 */
+	forEach: function( callback, type, skipRoot ) {
+		if ( !skipRoot && ( !type || this.type == type ) )
+				var ret = callback( this );
+
+		// Do not filter children if callback returned false.
+		if ( ret === false )
+			return;
+
+		var children = this.getChildren(),
+			node,
+			i = 0;
+
+		// We do not cache the size, because the live list of nodes may be changed by the callback.
+		for ( ; i < children.count(); i++ ) {
+			node = children.getItem( i );
+			if ( node.type == CKEDITOR.NODE_ELEMENT )
+				node.forEach( callback, type );
+			else if ( !type || node.type == type )
+				callback( node );
+		}
 	}
-});
+} );
+
+	function createTmpId( element ) {
+		var hadId = true;
+
+		if ( !element.$.id ) {
+			element.$.id = 'cke_tmp_' + CKEDITOR.tools.getNextNumber();
+			hadId = false;
+		}
+
+		return function() {
+			if ( !hadId )
+				element.removeAttribute( 'id' );
+		};
+	}
+
+	function getContextualizedSelector( element, selector ) {
+		return '#' + element.$.id + ' ' + selector.split( /,\s*/ ).join( ', #' + element.$.id + ' ' );
+	}
 
 	var sides = {
 		width: [ 'border-left-width', 'border-right-width', 'padding-left', 'padding-right' ],
@@ -1820,7 +1973,7 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 
 			if ( components ) {
 				for ( var j = 0 ; j < components.length ; j++ )
-					styles.push( [ style, sides[ i ], components[j] ].join( '-' ) );
+					styles.push( [ style, sides[ i ], components[ j ] ].join( '-' ) );
 			}
 			else
 				styles.push( [ style, sides[ i ] ].join( '-' ) );
@@ -1866,4 +2019,4 @@ CKEDITOR.tools.extend( CKEDITOR.dom.element.prototype, {
 
 		return size;
 	};
-})();
+} )();

@@ -1,6 +1,6 @@
 ﻿/**
- * @license Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.html or http://ckeditor.com/license
+ * @license Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
 /**
@@ -18,16 +18,9 @@
  * @namespace
  */
 CKEDITOR.lang[ 'nb' ] = {
-	/**
-	 * The language reading direction. Possible values are "rtl" for
-	 * Right-To-Left languages (like Arabic) and "ltr" for Left-To-Right
-	 * languages (like English).
-	 * @default 'ltr'
-	 */
-	dir: 'ltr',
-
 	// ARIA description.
 	editor: 'Rikteksteditor',
+	editorPanel: 'Panel for rikteksteditor',
 
 	// Common messages and labels.
 	common: {
@@ -35,7 +28,7 @@ CKEDITOR.lang[ 'nb' ] = {
 		// of reading non-English words. So be careful while translating it.
 		editorHelp: 'Trykk ALT 0 for hjelp',
 
-		browseServer: 'Bla igjennom server',
+		browseServer: 'Bla gjennom tjener',
 		url: 'URL',
 		protocol: 'Protokoll',
 		upload: 'Last opp',
@@ -70,8 +63,8 @@ CKEDITOR.lang[ 'nb' ] = {
 		generalTab: 'Generelt',
 		advancedTab: 'Avansert',
 		validateNumberFailed: 'Denne verdien er ikke et tall.',
-		confirmNewPage: 'Alle ulagrede endringer som er gjort i dette innholdet vil bli tapt. Er du sikker på at du vil laste en ny side?',
-		confirmCancel: 'Noen av valgene har blitt endret. Er du sikker på at du vil lukke dialogen?',
+		confirmNewPage: 'Alle ulagrede endringer som er gjort i dette innholdet vil gå tapt. Er du sikker på at du vil laste en ny side?',
+		confirmCancel: 'Du har endret noen alternativer. Er du sikker på at du vil lukke dialogvinduet?',
 		options: 'Valg',
 		target: 'Mål',
 		targetNew: 'Nytt vindu (_blank)',

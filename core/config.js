@@ -1,6 +1,6 @@
 ﻿/**
- * @license Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.html or http://ckeditor.com/license
+ * @license Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
 /**
@@ -207,6 +207,12 @@ CKEDITOR.config = {
 	 *
 	 *		config.bodyClass = 'contents';
 	 *
+	 * **Note:** Editor needs to load stylesheets containing contents styles. You can either
+	 * copy them to the `contents.css` file that editor loads by default or set the {@link #contentsCss}
+	 * option.
+	 *
+	 * **Note:** This setting applies only to the classic editor (the one that uses `iframe`).
+	 *
 	 * @since 3.1
 	 * @cfg
 	 */
@@ -323,7 +329,14 @@ CKEDITOR.config = {
 	 * The keystrokes that are blocked by default as the browser implementation
 	 * is buggy. These default keystrokes are handled by the editor.
 	 *
-	 * @cfg {Array} [=[ CKEDITOR.CTRL + 66, CKEDITOR.CTRL + 73, CKEDITOR.CTRL + 85 ] // CTRL+B,I,U]
+	 *		// Default setting.
+	 *		config.blockedKeystrokes = [
+	 *			CKEDITOR.CTRL + 66, // CTRL+B
+	 *			CKEDITOR.CTRL + 73, // CTRL+I
+	 *			CKEDITOR.CTRL + 85 // CTRL+U
+	 *		];
+	 *
+	 * @cfg {Array} [blockedKeystrokes=see example]
 	 */
 	blockedKeystrokes: [
 		CKEDITOR.CTRL + 66, // CTRL+B

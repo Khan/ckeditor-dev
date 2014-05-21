@@ -1,6 +1,6 @@
 /**
- * @license Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.html or http://ckeditor.com/license
+ * @license Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
 /*
@@ -55,7 +55,7 @@ CKEDITOR.skin.name = 'kama';
 // The available browser specific files must be set separately for editor.css
 // and dialog.css.
 CKEDITOR.skin.ua_editor = 'ie,iequirks,ie7,ie8';
-CKEDITOR.skin.ua_dialog = 'ie,iequirks,ie7,ie8,opera';
+CKEDITOR.skin.ua_dialog = 'ie,iequirks,ie7,ie8';
 
 
 // 3. Define the "Chameleon" feature
@@ -233,7 +233,7 @@ CKEDITOR.skin.chameleon = function( editor, part ) {
 // used instead. This means that a skin is not required to provide all icons.
 // Actually, it is not required to provide icons at all.
 
-(function() {
+( function() {
 	// The available icons. This list must match the file names (without
 	// extension) available inside the "icons" folder.
 	var icons = ( 'about,anchor-rtl,anchor,bgcolor,bidiltr,bidirtl,blockquote,' +
@@ -255,7 +255,7 @@ CKEDITOR.skin.chameleon = function( editor, part ) {
 	for ( var i = 0; i < icons.length; i++ ) {
 		CKEDITOR.skin.addIcon( icons[ i ], iconsFolder + icons[ i ] + '.png' );
 	}
-})();
+} )();
 
 // %REMOVE_END%
 

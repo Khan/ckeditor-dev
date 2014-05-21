@@ -1,10 +1,11 @@
 ﻿/**
- * @license Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.html or http://ckeditor.com/license
+ * @license Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
 CKEDITOR.dialog.add( 'about', function( editor ) {
-	var lang = editor.lang.about;
+	var lang = editor.lang.about,
+		imagePath = CKEDITOR.plugins.get( 'about' ).path + 'dialogs/' + ( CKEDITOR.env.hidpi ? 'hidpi/' : '' ) + 'logo_ckeditor.png';
 
 	return {
 		title: CKEDITOR.env.ie ? lang.dlgTitle : lang.title,
@@ -35,7 +36,8 @@ CKEDITOR.dialog.add( 'about', function( editor ) {
 					'{' +
 						'height:81px;' +
 						'background-color:#fff;' +
-						'background-image:url(' + CKEDITOR.plugins.get( 'about' ).path + 'dialogs/logo_ckeditor.png);' +
+						'background-image:url(' + imagePath + ');' +
+						( CKEDITOR.env.hidpi ? 'background-size:163px 58px;' : '' ) +
 						'background-position:center; ' +
 						'background-repeat:no-repeat;' +
 						'margin-bottom:10px;' +
@@ -51,17 +53,17 @@ CKEDITOR.dialog.add( 'about', function( editor ) {
 					'<div class="cke_about_logo"></div>' +
 					'<p>' +
 						'CKEditor ' + CKEDITOR.version + ' (revision ' + CKEDITOR.revision + ')<br>' +
-						'<a href="http://ckeditor.com/">http://ckeditor.com</a>' +
+						'<a target="_blank" href="http://ckeditor.com/">http://ckeditor.com</a>' +
 					'</p>' +
 					'<p>' +
-						lang.help.replace( '$1', '<a href="http://docs.ckeditor.com/user">' + lang.userGuide + '</a>' ) +
+						lang.help.replace( '$1', '<a target="_blank" href="http://docs.ckeditor.com/user">' + lang.userGuide + '</a>' ) +
 					'</p>' +
 					'<p>' +
 						lang.moreInfo + '<br>' +
-						'<a href="http://ckeditor.com/about/license">http://ckeditor.com/about/license</a>' +
+						'<a target="_blank" href="http://ckeditor.com/about/license">http://ckeditor.com/about/license</a>' +
 					'</p>' +
 					'<p>' +
-						lang.copy.replace( '$1', '<a href="http://cksource.com/">CKSource</a> - Frederico Knabben' ) +
+						lang.copy.replace( '$1', '<a target="_blank" href="http://cksource.com/">CKSource</a> - Frederico Knabben' ) +
 					'</p>' +
 					'</div>'
 			}
@@ -70,4 +72,4 @@ CKEDITOR.dialog.add( 'about', function( editor ) {
 		],
 		buttons: [ CKEDITOR.dialog.cancelButton ]
 	};
-});
+} );

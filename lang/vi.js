@@ -1,6 +1,6 @@
 ﻿/**
- * @license Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.html or http://ckeditor.com/license
+ * @license Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
 /**
@@ -18,16 +18,9 @@
  * @namespace
  */
 CKEDITOR.lang[ 'vi' ] = {
-	/**
-	 * The language reading direction. Possible values are "rtl" for
-	 * Right-To-Left languages (like Arabic) and "ltr" for Left-To-Right
-	 * languages (like English).
-	 * @default 'ltr'
-	 */
-	dir: 'ltr',
-
 	// ARIA description.
-	editor: 'Bộ soạn thảo',
+	editor: 'Bộ soạn thảo văn bản có định dạng',
+	editorPanel: 'Bảng điều khiển Rich Text Editor',
 
 	// Common messages and labels.
 	common: {
@@ -35,7 +28,7 @@ CKEDITOR.lang[ 'vi' ] = {
 		// of reading non-English words. So be careful while translating it.
 		editorHelp: 'Nhấn ALT + 0 để được giúp đỡ',
 
-		browseServer: 'Duyệt trên máy chủ',
+		browseServer: 'Duyệt máy chủ',
 		url: 'URL',
 		protocol: 'Giao thức',
 		upload: 'Tải lên',
@@ -61,7 +54,7 @@ CKEDITOR.lang[ 'vi' ] = {
 		longDescr: 'Mô tả URL',
 		cssClass: 'Lớp Stylesheet',
 		advisoryTitle: 'Nhan đề hướng dẫn',
-		cssStyle: 'Kiểu (style)',
+		cssStyle: 'Kiểu ',
 		ok: 'Đồng ý',
 		cancel: 'Bỏ qua',
 		close: 'Đóng',
@@ -83,7 +76,7 @@ CKEDITOR.lang[ 'vi' ] = {
 		styles: 'Kiểu',
 		cssClasses: 'Lớp CSS',
 		width: 'Chiều rộng',
-		height: 'chiều cao',
+		height: 'Chiều cao',
 		align: 'Vị trí',
 		alignLeft: 'Trái',
 		alignRight: 'Phải',
