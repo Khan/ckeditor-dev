@@ -14,7 +14,7 @@
 
 	CKEDITOR.plugins.add( 'mathhax', {
 		requires: 'widget,dialog',
-		icons: 'mathjax',
+		icons: 'mathhax',
 		hidpi: true, // %REMOVE_LINE_CORE%
 
 		init: function( editor ) {

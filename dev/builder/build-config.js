@@ -70,6 +70,8 @@ var CKBUILDER_CONFIG = {
 		templates: 1,
 		toolbar: 1,
 		undo: 1,
-		wysiwygarea: 1
+		wysiwygarea: 1,
+        mathhax: 1,
+        scratchpad: 1
 	}
 };

@@ -9,6 +9,7 @@ var pluginName = "scratchpad";
 CKEDITOR.plugins.add(pluginName, {
     requires: "dialog,fakeobjects",
     icons: pluginName,
+    hidpi: true, // %REMOVE_LINE_CORE%
 
     init: function(editor) {
         var plugin = this;
