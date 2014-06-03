@@ -14,7 +14,7 @@
 	var cdn = 'http:\/\/cdn.mathjax.org\/mathjax\/2.2-latest\/MathJax.js?config=TeX-AMS_HTML';
 
 	CKEDITOR.plugins.add( 'mathjax', {
-		lang: 'ar,ca,cs,cy,de,el,en,en-gb,eo,es,fa,fi,fr,gl,he,hr,hu,it,ja,km,nb,nl,no,pl,pt,pt-br,ro,ru,sl,sv,tt,uk,vi,zh,zh-cn', // %REMOVE_LINE_CORE%
+		lang: 'ar,ca,cs,cy,de,el,en,en-gb,es,fa,fi,fr,gl,hr,hu,ja,km,nb,nl,no,pl,pt,pt-br,ro,ru,sl,sv,uk,zh,zh-cn', // %REMOVE_LINE_CORE%
 		requires: 'widget,dialog',
 		icons: 'mathjax',
 		hidpi: true, // %REMOVE_LINE_CORE%
@@ -28,15 +28,6 @@
 				button: editor.lang.mathjax.button,
 				mask: true,
 				allowedContent: 'span(!' + cls + ')',
-				// Allow style classes only on spans having mathjax class.
-				styleToAllowedContentRules: function( style ) {
-					var classes = style.getClassesArray();
-					if ( !classes )
-						return null;
-					classes.push( '!' + cls );
-
-					return 'span(' + classes.join( ',' ) + ')';
-				},
 				pathName: editor.lang.mathjax.pathName,
 
 				template: '<span class="' + cls + '" style="display:inline-block" data-cke-survive=1></span>',
@@ -91,7 +82,7 @@
 					if ( el.children.length > 1 || el.children[ 0 ].type != CKEDITOR.NODE_TEXT )
 						return;
 
-					data.math = CKEDITOR.tools.htmlDecode( el.children[ 0 ].value );
+					data.math = el.children[ 0 ].value;
 
 					// Add style display:inline-block to have proper height of widget wrapper and mask.
 					var attrs = el.attributes;
@@ -110,7 +101,7 @@
 				},
 
 				downcast: function( el ) {
-					el.children[ 0 ].replaceWith( new CKEDITOR.htmlParser.text( CKEDITOR.tools.htmlEncode( this.data.math ) ) );
+					el.children[ 0 ].replaceWith( new CKEDITOR.htmlParser.text( this.data.math ) );
 
 					// Remove style display:inline-block.
 					var attrs = el.attributes;
@@ -384,7 +375,7 @@
 				 * @param {String} value TeX string.
 				 */
 				setValue: function( value ) {
-					newValue = CKEDITOR.tools.htmlEncode( value );
+					newValue = value;
 
 					if ( isInit && !isRunning )
 						update();
@@ -410,7 +401,7 @@
 					var doc = iFrame.getFrameDocument(),
 						tex = doc.getById( 'tex' );
 
-					tex.setHtml( CKEDITOR.plugins.mathjax.trim( CKEDITOR.tools.htmlEncode( value ) ) );
+					tex.setHtml( CKEDITOR.plugins.mathjax.trim( value ) );
 
 					CKEDITOR.plugins.mathjax.copyStyles( iFrame, tex );
 
