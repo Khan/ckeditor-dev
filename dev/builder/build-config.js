@@ -71,6 +71,11 @@ var CKBUILDER_CONFIG = {
 		toolbar: 1,
 		undo: 1,
 		wysiwygarea: 1,
+        gglspreadsheet: 1,
+        image2: 1,
+        pdfs: 1,
+        youtube: 1,
+        sourcedialog: 1,
         mathhax: 1,
         scratchpad: 1
 	}
