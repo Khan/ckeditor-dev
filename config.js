@@ -65,7 +65,14 @@ CKEDITOR.editorConfig = function( config ) {
 		'templates,' +
 		'toolbar,' +
 		'undo,' +
-		'wysiwygarea';
+		'wysiwygarea' +
+        'gglspreadsheet' +
+        'image2' +
+        'pdfs' +
+        'youtube' +
+        'sourcedialog' +
+        'mathhax' +
+        'scratchpad';
 	// %REMOVE_END%
 };
 
