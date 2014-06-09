@@ -4,6 +4,7 @@ This plugin embeds a pdf in the page. command() controls what happens when the b
 
 CKEDITOR.plugins.add( 'pdfs',
 {
+    icons: "pdfs",
 	init: function( editor )
 	{
       editor.addCommand( 'pdfsDialog', new CKEDITOR.dialogCommand( 'pdfsDialog' ) );
@@ -11,7 +12,6 @@ CKEDITOR.plugins.add( 'pdfs',
       editor.ui.addButton( 'Pdfs',
       {
           label:'Embed Pdf',
-          icon: this.path + 'pdf.png',
           command: 'pdfsDialog'
       } );
       
@@ -57,7 +57,7 @@ CKEDITOR.plugins.add( 'pdfs',
                 this.commitContent( data );
                 if(data.link)
                 {
-                    editor.insertHtml('<iframe embed src="'+data.link+'" width="900" height="1065"></iframe>');
+                    editor.insertHtml('<iframe embed src="'+data.link+'" width="100%" height="600"></iframe>');
                 }
              }
         };

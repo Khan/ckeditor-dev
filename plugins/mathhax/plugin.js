@@ -21,7 +21,7 @@
 			editor.widgets.add( 'mathhax', {
 				inline: true,
 				dialog: 'mathhax',
-				button: 'Math',
+				button: 'Mathhax',
 				mask: true,
 				allowedContent: 'code(!latex)',
 				pathName: 'math',

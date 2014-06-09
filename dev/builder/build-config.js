@@ -3,6 +3,14 @@
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
+/* All plugins that were disabled (set to zero) were removed because we did not want content creators to have that functionality.
+gglspreadsheet was added for our googlespreadsheet embedding plugin,
+youtube for a youtube embedding plugin,
+scratchpad for a scratchpad embedding plugin,
+pdfs for our pdf embed plugin, and image2 for a simpler image plugin
+mathhax for latex editing
+*/
+
 var CKBUILDER_CONFIG = {
 	skin: 'moono',
 	ignore: [
@@ -21,7 +29,7 @@ var CKBUILDER_CONFIG = {
 		bidi: 1,
 		blockquote: 1,
 		clipboard: 1,
-		colorbutton: 1,
+		colorbutton: 0,
 		colordialog: 1,
 		contextmenu: 1,
 		dialogadvtab: 1,
@@ -47,13 +55,13 @@ var CKBUILDER_CONFIG = {
 		list: 1,
 		liststyle: 1,
 		magicline: 1,
-		maximize: 1,
-		newpage: 1,
-		pagebreak: 1,
-		pastefromword: 1,
+		maximize: 0,
+		newpage: 0,
+		pagebreak: 0,
+		pastefromword: 0,
 		pastetext: 1,
-		preview: 1,
-		print: 1,
+		preview: 0,
+		print: 0,
 		removeformat: 1,
 		resize: 1,
 		save: 1,
@@ -62,6 +70,7 @@ var CKBUILDER_CONFIG = {
 		showborders: 1,
 		smiley: 1,
 		sourcearea: 1,
+		sourcedialog: 1,
 		specialchar: 1,
 		stylescombo: 1,
 		tab: 1,
@@ -75,7 +84,6 @@ var CKBUILDER_CONFIG = {
         image2: 1,
         pdfs: 1,
         youtube: 1,
-        sourcedialog: 1,
         mathhax: 1,
         scratchpad: 1
 	}
