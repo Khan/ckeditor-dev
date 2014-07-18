@@ -168,6 +168,33 @@ var getDialog = function(editor) {
                     }
                 },
                 {
+                    type: "checkbox",
+                    id: "startOnScroll",
+                    label: "Don't start scratchpad until user scrolls to it.",
+                    setup: function(iframe) {
+                        // Extract autoStart option from the query string
+                        if (iframe && iframe.hasAttribute("src")) {
+                            var url = iframe.getAttribute("src");
+                            if (/autoStart=(\w+)/.test(url)) {
+                                this.setValue(RegExp.$1 === "no");
+                            }
+                        }
+                    },
+                    commit: function(iframe) {
+                        // Set autoStart option
+                        var url = iframe.getAttribute("src");
+                        if (this.getValue()) {
+                            // Start on scroll, not on first load
+                            iframe.setAttribute("src", url + "&autoStart=no");
+                            iframe.setAttribute("data-start-on-scroll", true);
+                        } else {
+                            // Start on first load, not on scroll
+                            iframe.setAttribute("src", url + "&autoStart=yes");
+                            iframe.removeAttribute("data-start-on-scroll");
+                        }
+                    }
+                },
+                {
                     type: "hbox",
                     children: [
                         {
