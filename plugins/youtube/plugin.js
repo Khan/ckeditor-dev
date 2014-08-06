@@ -14,7 +14,7 @@ CKEDITOR.plugins.add( 'youtube',
           command: 'youtubeDialog'
       } );
       
-      var allowed = 'iframe[width,height,src,frameborder,allowfullscreen]';
+      var allowed = 'iframe[width,height,src,frameborder,allowfullscreen],div(video-wrapper)';
       pluginName = 'youtubeDialog';
       
       editor.addCommand( pluginName, new CKEDITOR.dialogCommand( pluginName, {
@@ -56,7 +56,7 @@ CKEDITOR.plugins.add( 'youtube',
                 this.commitContent( data );
                 if(data.youtubeId)
                 {
-                    editor.insertHtml('<iframe width="560" height="315" src="//www.youtube.com/embed/' + data.youtubeId + '?rel=0" frameborder="0" allowfullscreen></iframe>');
+                    editor.insertHtml('<div class="video-wrapper"><iframe width="560" height="315" src="//www.youtube.com/embed/' + data.youtubeId + '?rel=0" frameborder="0" allowfullscreen></iframe></div>');
                 }
              }
         };
