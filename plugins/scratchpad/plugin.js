@@ -19,7 +19,7 @@ CKEDITOR.plugins.add(pluginName, {
     init: function(editor) {
         var plugin = this;
         var allowed = "iframe[!src,!height,!width,scrolling,frameBorder](" +
-            pluginName + "),div(iframe-wrapper)";
+            pluginName + "),div(scratchpad-wrapper)";
         var lang = editor.lang.fakeobjects;
         lang[pluginName] = "Embedded Scratchpad";
 
@@ -309,7 +309,7 @@ var getDialog = function(editor) {
             });
 
 	    var wrapperNode = new CKEDITOR.dom.element("div");
-            wrapperNode.setAttributes({"class": "iframe-wrapper"});
+            wrapperNode.setAttributes({"class": "scratchpad-wrapper"});
             wrapperNode.append(iframeNode);
 
             // Refresh the fake image.
