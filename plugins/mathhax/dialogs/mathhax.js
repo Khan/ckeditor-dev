@@ -5,7 +5,7 @@
 
 'use strict';
 
-var TeX = KAdefine.require('react-components/tex.jsx');
+var TeX = React.createFactory(KAdefine.require('react-components/tex.jsx'));
 
 CKEDITOR.dialog.add( 'mathhax', function( editor ) {
 
@@ -46,7 +46,7 @@ CKEDITOR.dialog.add( 'mathhax', function( editor ) {
 						onLoad: function(widget) {
                             preview = function(math) {
                                 var elem = CKEDITOR.document.getById(this.domId).$;
-                                React.renderComponent(TeX({}, math), elem);
+                                React.render(TeX({}, math), elem);
                             }.bind(this);
                             preview('');
 						},

@@ -1,7 +1,7 @@
 ﻿(function() {
     'use strict';
 
-    var TeX = KAdefine.require('react-components/tex.jsx');
+    var TeX = React.createFactory(KAdefine.require('react-components/tex.jsx'));
 
     var renderTeX = function(elem, math) {
         // clear out the container
@@ -9,7 +9,7 @@
             elem.removeChild(elem.lastChild);
         }
 
-        React.renderComponent(TeX({}, math), elem);
+        React.render(TeX({}, math), elem);
     };
 
 	CKEDITOR.plugins.add( 'mathhax', {
