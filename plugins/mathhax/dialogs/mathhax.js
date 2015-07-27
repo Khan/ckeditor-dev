@@ -9,54 +9,60 @@ var TeX = React.createFactory(KAdefine.require('react-components/tex.jsx'));
 
 CKEDITOR.dialog.add( 'mathhax', function( editor ) {
 
-	var preview;
+    var preview;
 
-	return {
-		title: 'LaTeX',
-		minWidth: 350,
-		minHeight: 100,
-		contents: [
-			{
-				id: 'info',
-				elements: [
-					{
-						id: 'equation',
-						type: 'textarea',
+    return {
+        title: 'Math',
+        minWidth: 350,
+        minHeight: 100,
+        contents: [
+            {
+                id: 'info',
+                elements: [
+                    {
+                        id: 'equation',
+                        type: 'textarea',
 
-						onLoad: function( widget ) {
+                        onLoad: function( widget ) {
                             this.getInputElement().on('keyup', function() {
                                 var input = this.getInputElement().getValue();
                                 preview(input);
                             }.bind(this));
-						},
+                        },
 
-						setup: function( widget ) {
-							this.setValue(widget.data.math);
-						},
+                        setup: function( widget ) {
+                            this.setValue(widget.data.math);
+                        },
 
-						commit: function( widget ) {
-							widget.setData('math', this.getValue());
-						}
-					},
-					{
-						id: 'preview',
-						type: 'html',
-						html: '<code class="latex" style="font-size: 150%;"></code>',
+                        commit: function( widget ) {
+                            widget.setData('math', this.getValue());
+                        }
+                    },
+                    {
+                        id: 'preview',
+                        type: 'html',
+                        html: '<code class="latex" style="font-size: 150%;"></code>',
 
-						onLoad: function(widget) {
+                        onLoad: function(widget) {
                             preview = function(math) {
                                 var elem = CKEDITOR.document.getById(this.domId).$;
                                 React.render(TeX({}, math), elem);
                             }.bind(this);
                             preview('');
-						},
+                        },
 
-						setup: function( widget ) {
-							preview(widget.data.math);
-						}
-					}
-				]
-			}
-		]
-	};
+                        setup: function( widget ) {
+                            preview(widget.data.math);
+                        }
+                    },
+                    {
+                        type: 'html',
+                        html: '<p>Please use <a href="' +
+                            'https://en.wikibooks.org/wiki/LaTeX/Mathematics' +
+                            '">LaTeX formatting</a> for the math.</p>'
+                    }
+                ]
+            }
+        ]
+    };
 } );

@@ -17,8 +17,8 @@ CKEDITOR.plugins.add( 'image2',
       } );
 
       var allowed = 'img[alt,!src]{border-style,border-width,float,height,margin,margin-bottom,margin-left,margin-right,margin-top,width,class,style}; span[class](*);';
-      required = 'img[alt,src]';
-      pluginName = 'image2Dialog';
+      var required = 'img[alt,src]';
+      var pluginName = 'image2Dialog';
 
       editor.addCommand( pluginName, new CKEDITOR.dialogCommand( pluginName, {
       	allowedContent: allowed,
