@@ -52,6 +52,14 @@ CKEDITOR.plugins.add(pluginName, {
             }
         });
 
+        // Add a version to the frame URL to avoid caching across deploys
+        if (typeof KAdefine !== "undefined") {
+            var KA = KAdefine.require("./javascript/shared-package/ka.js");
+            if (!KA.IS_DEV_SERVER) {
+                frameURL += "?v=" + KA.version;
+            }
+        }
+
         // Initialize the dialog
         CKEDITOR.dialog.addIframe(pluginName, buttonName, frameURL,
             defaultWidth, defaultHeight, getLoadHandler(editor));
