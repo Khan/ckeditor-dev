@@ -1,16 +1,22 @@
 ﻿(function() {
     'use strict';
 
-    var TeX = React.createFactory(KAdefine.require('react-components/tex.jsx'));
+    // Placeholder
+    var renderTex = function() {};
 
-    var renderTeX = function(elem, math) {
-        // clear out the container
-        while (elem.lastChild) {
-            elem.removeChild(elem.lastChild);
-        }
+    if (typeof React !== "undefined" && typeof KAdefine !== "undefined") {
+        var TeX = React.createFactory(
+            KAdefine.require('react-components/tex.jsx'));
 
-        React.render(TeX({}, math), elem);
-    };
+        renderTeX = function(elem, math) {
+            // clear out the container
+            while (elem.lastChild) {
+                elem.removeChild(elem.lastChild);
+            }
+
+            React.render(TeX({}, math), elem);
+        };
+    }
 
 	CKEDITOR.plugins.add( 'mathhax', {
 		requires: 'widget,dialog',
