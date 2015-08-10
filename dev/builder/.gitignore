@@ -1,2 +1,3 @@
-/release
+/release/*.tar.gz
+/release/*.zip
 /ckbuilder

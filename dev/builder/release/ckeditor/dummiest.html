@@ -1,0 +1,28 @@
+<html>
+<head>
+    <title>CKEditor Sample</title>
+    <script src="ckeditor.js"></script>
+	 <script>
+	    window.onload = function() {
+	        CKEDITOR.replace( 'editor1' );
+			//TODO: figure out how to remove anchors
+			CKEDITOR.config.removePlugins = 'smiley,about,font,iframe,print,pastetext,pastefromword,find,selectall,'+
+			'colorbutton,div,forms,stylescombo,maximize,clipboard,templates,newpage,preview,undo,redo,'+
+			'pagebreak,horizontalrule,showblocks,anchor,flash';
+	    };
+	</script>
+</head>
+<body>
+    <form method="post">
+        <p>
+            My Editor:<br>
+            <textarea name="editor1">&lt;p&gt;Initial value.&lt;/p&gt;</textarea>
+        </p>
+        <p>
+            <input type="submit">
+        </p>
+    </form>
+    <!--<iframe embed src='http://math.uchicago.edu/~shmuel/Network-course-readings/MCMCRev.pdf' width="500" height="625"></iframe>
+    <!--<iframe src="http://math.uchicago.edu/~shmuel/Network-course-readings/MCMCRev.pdf" width:"718px; height:1400px;" frameborder="0"></iframe>-->
+</body>
+</html>
