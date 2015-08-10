@@ -2,7 +2,6 @@
 /release/*.zip
 /release/ckeditor/samples
 /release/ckeditor/skins/kama
-/release/*/lang
 /release/ckeditor/plugins/*/*
 !/release/ckeditor/plugins/*/*.js
 !/release/ckeditor/plugins/*/dialogs
