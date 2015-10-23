@@ -7,7 +7,7 @@
 
 // Stub used for translation of the inline strings
 // This is the format used on KA.org
-var $ = {
+var i18n = {
     _: function(msg) {
         return msg;
     }
@@ -17,18 +17,18 @@ var $ = {
 var pluginName = "drawing";
 
 // The name of the button and dialog
-var buttonName = $._("Drawing");
+var buttonName = i18n._("Drawing");
 
 // The button label
-var buttonLabel = $._("Add Drawing");
+var buttonLabel = i18n._("Add Drawing");
 
 // The label to show on hover over the drawing
-var hoverLabel = $._("Click to edit");
+var hoverLabel = i18n._("Click to edit");
 
 // IE requires two clicks to edit (this seems to be a limitation of
 // the contenteditable environment)
 if (CKEDITOR.env.ie) {
-    hoverLabel = $._("Double-click to edit");
+    hoverLabel = i18n._("Double-click to edit");
 }
 
 // The default width and height of the dialog window
