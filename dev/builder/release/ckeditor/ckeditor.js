@@ -1029,4 +1029,119 @@ CKEDITOR.config.skin="moono",function(){var c=function(c,d){for(var a=CKEDITOR.g
 "icons_hidpi.png"):c("about,0,auto,bold,24,auto,italic,48,auto,strike,72,auto,subscript,96,auto,superscript,120,auto,underline,144,auto,bidiltr,168,auto,bidirtl,192,auto,blockquote,216,auto,copy-rtl,240,auto,copy,264,auto,cut-rtl,288,auto,cut,312,auto,paste-rtl,336,auto,paste,360,auto,codesnippet,384,auto,bgcolor,408,auto,textcolor,432,auto,creatediv,456,auto,docprops-rtl,480,auto,docprops,504,auto,drawing,528,auto,find-rtl,552,auto,find,576,auto,replace,600,auto,flash,624,auto,button,648,auto,checkbox,672,auto,form,696,auto,hiddenfield,720,auto,imagebutton,744,auto,radio,768,auto,select-rtl,792,auto,select,816,auto,textarea-rtl,840,auto,textarea,864,auto,textfield-rtl,888,auto,textfield,912,auto,gglspreadsheet,936,auto,horizontalrule,960,auto,iframe,984,auto,image,1008,auto,image2,1032,auto,indent-rtl,1056,auto,indent,1080,auto,outdent-rtl,1104,auto,outdent,1128,auto,justifyblock,1152,auto,justifycenter,1176,auto,justifyleft,1200,auto,justifyright,1224,auto,language,1248,auto,latex,1272,auto,anchor-rtl,1296,auto,anchor,1320,auto,link,1344,auto,unlink,1368,auto,bulletedlist-rtl,1392,auto,bulletedlist,1416,auto,numberedlist-rtl,1440,auto,numberedlist,1464,auto,mathhax,1488,auto,maximize,1512,auto,newpage-rtl,1536,auto,newpage,1560,auto,pagebreak-rtl,1584,auto,pagebreak,1608,auto,pastefromword-rtl,1632,auto,pastefromword,1656,auto,pastetext-rtl,1680,auto,pastetext,1704,auto,pdfs,1728,auto,placeholder,1752,auto,preview-rtl,1776,auto,preview,1800,auto,print,1824,auto,removeformat,1848,auto,save,1872,auto,scratchpad,1896,auto,selectall,1920,auto,showblocks-rtl,1944,auto,showblocks,1968,auto,smiley,1992,auto,source-rtl,2016,auto,source,2040,auto,sourcedialog-rtl,2064,auto,sourcedialog,2088,auto,specialchar,2112,auto,table,2136,auto,templates-rtl,2160,auto,templates,2184,auto,uicolor,2208,auto,redo-rtl,2232,auto,redo,2256,auto,undo-rtl,2280,auto,undo,2304,auto,youtube,2328,auto",
 "icons.png")}()})();
 
+/**
+ * @license Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md or http://ckeditor.com/license
+ */
+
+// This file contains style definitions that can be used by CKEditor plugins.
+//
+// The most common use for it is the "stylescombo" plugin, which shows a combo
+// in the editor toolbar, containing all styles. Other plugins instead, like
+// the div plugin, use a subset of the styles on their feature.
+//
+// If you don't have plugins that depend on this file, you can simply ignore it.
+// Otherwise it is strongly recommended to customize this file to match your
+// website requirements and design properly.
+
+CKEDITOR.stylesSet.add( 'default', [
+	/* Block Styles */
+
+	// These styles are already available in the "Format" combo ("format" plugin),
+	// so they are not needed here by default. You may enable them to avoid
+	// placing the "Format" combo in the toolbar, maintaining the same features.
+	/*
+	{ name: 'Paragraph',		element: 'p' },
+	{ name: 'Heading 1',		element: 'h1' },
+	{ name: 'Heading 2',		element: 'h2' },
+	{ name: 'Heading 3',		element: 'h3' },
+	{ name: 'Heading 4',		element: 'h4' },
+	{ name: 'Heading 5',		element: 'h5' },
+	{ name: 'Heading 6',		element: 'h6' },
+	{ name: 'Preformatted Text',element: 'pre' },
+	{ name: 'Address',			element: 'address' },
+	*/
+
+    { name: 'Heading',		element: 'h3' },
+
+	{ name: 'Italic Title',		element: 'h2', styles: { 'font-style': 'italic' } },
+	{ name: 'Subtitle',			element: 'h3', styles: { 'color': '#aaa', 'font-style': 'italic' } },
+	{
+		name: 'Special Container',
+		element: 'div',
+		styles: {
+			padding: '5px 10px',
+			background: '#eee',
+			border: '1px solid #ccc'
+		}
+	},
+
+	/* Inline Styles */
+
+	// These are core styles available as toolbar buttons. You may opt enabling
+	// some of them in the Styles combo, removing them from the toolbar.
+	// (This requires the "stylescombo" plugin)
+	/*
+	{ name: 'Strong',			element: 'strong', overrides: 'b' },
+	{ name: 'Emphasis',			element: 'em'	, overrides: 'i' },
+	{ name: 'Underline',		element: 'u' },
+	{ name: 'Strikethrough',	element: 'strike' },
+	{ name: 'Subscript',		element: 'sub' },
+	{ name: 'Superscript',		element: 'sup' },
+	*/
+
+	{ name: 'Marker',			element: 'span', attributes: { 'class': 'marker' } },
+
+	{ name: 'Big',				element: 'big' },
+	{ name: 'Small',			element: 'small' },
+	{ name: 'Typewriter',		element: 'tt' },
+
+	{ name: 'Computer Code',	element: 'code' },
+	{ name: 'Keyboard Phrase',	element: 'kbd' },
+	{ name: 'Sample Text',		element: 'samp' },
+	{ name: 'Variable',			element: 'var' },
+
+	{ name: 'Deleted Text',		element: 'del' },
+	{ name: 'Inserted Text',	element: 'ins' },
+
+	{ name: 'Cited Work',		element: 'cite' },
+	{ name: 'Inline Quotation',	element: 'q' },
+
+	{ name: 'Language: RTL',	element: 'span', attributes: { 'dir': 'rtl' } },
+	{ name: 'Language: LTR',	element: 'span', attributes: { 'dir': 'ltr' } },
+
+	/* Object Styles */
+
+	{
+		name: 'Styled image (left)',
+		element: 'img',
+		attributes: { 'class': 'left' }
+	},
+
+	{
+		name: 'Styled image (right)',
+		element: 'img',
+		attributes: { 'class': 'right' }
+	},
+
+	{
+		name: 'Compact table',
+		element: 'table',
+		attributes: {
+			cellpadding: '5',
+			cellspacing: '0',
+			border: '1',
+			bordercolor: '#ccc'
+		},
+		styles: {
+			'border-collapse': 'collapse'
+		}
+	},
+
+	{ name: 'Borderless Table',		element: 'table',	styles: { 'border-style': 'hidden', 'background-color': '#E6E6FA' } },
+	{ name: 'Square Bulleted List',	element: 'ul',		styles: { 'list-style-type': 'square' } }
+] );
+
+// %LEAVE_UNMINIFIED% %REMOVE_LINE%
+
 module.exports = CKEDITOR;
