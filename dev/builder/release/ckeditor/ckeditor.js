@@ -1,3 +1,8 @@
+/**
+ * Override CKEditor's base bath so it loads properly out of the minified package.
+ */
+window.CKEDITOR_BASEPATH = "/ckeditor/";
+
 ﻿/*
 Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.html or http://ckeditor.com/license
