@@ -4,9 +4,8 @@
     // Placeholder
     var renderTex = function() {};
 
-    if (typeof React !== "undefined" && typeof KAdefine !== "undefined") {
-        var TeX = React.createFactory(
-            KAdefine.require('react-components/tex.jsx'));
+    if (typeof React !== "undefined") {
+        var TeX = React.createFactory(require('react-components/tex.jsx'));
 
         renderTeX = function(elem, math) {
             // clear out the container

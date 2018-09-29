@@ -72,8 +72,7 @@ CKEDITOR.editorConfig = function( config ) {
 		'youtube,' +
 		'sourcedialog,' +
 		'mathhax,' +
-		'scratchpad,'
-		'drawing';
+                'scratchpad';
 	// %REMOVE_END%
 };
 

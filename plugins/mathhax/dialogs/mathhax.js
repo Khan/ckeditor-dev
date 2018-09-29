@@ -5,7 +5,7 @@
 
 'use strict';
 
-var TeX = React.createFactory(KAdefine.require('react-components/tex.jsx'));
+var TeX = React.createFactory(require('react-components/tex.jsx'));
 
 CKEDITOR.dialog.add( 'mathhax', function( editor ) {
 
