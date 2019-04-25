@@ -3,6 +3,10 @@
  */
 window.CKEDITOR_BASEPATH = "/ckeditor/";
 
+// Using undefined variables in modules is forbidden so we define CKEDITOR
+// to be null so it's defined before giving it its real value.
+window.CKEDITOR = null;
+
 ﻿/*
 Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.html or http://ckeditor.com/license
