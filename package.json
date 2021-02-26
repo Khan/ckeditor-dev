@@ -1,0 +1,21 @@
+{
+  "name": "ckeditor",
+  "version": "4.4.1",
+  "main": "dev/builder/release/ckeditor/ckeditor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Khan/ckeditor-dev.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Khan/ckeditor-dev/issues"
+  },
+  "homepage": "https://github.com/Khan/ckeditor-dev#readme",
+  "exports": {
+      ".": "dev/builder/release/ckeditor/"
+  }
+}
