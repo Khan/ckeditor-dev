@@ -1,7 +1,7 @@
 /**
  * Override CKEditor's base bath so it loads properly out of the minified package.
  */
-window.CKEDITOR_BASEPATH = "/ckeditor/";
+window.CKEDITOR_BASEPATH = "https://cdn.kastatic.org/ckeditor/";
 
 // Using undefined variables in modules is forbidden so we define CKEDITOR
 // to be null so it's defined before giving it its real value.
